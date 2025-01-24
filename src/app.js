@@ -40,10 +40,12 @@ function main(){
     UI.connectionIndicator.style.backgroundColor = "#F00"
     UI.btnStart.addEventListener("click", ()=>{
         console.log("Start");
+        socket.emit("app_data_handler", {"operation": "START_DATA_ACQ"});
     });
     
     UI.btnStop.addEventListener("click", ()=>{
         console.log("Stop");
+        socket.emit("app_data_handler", {"operation": "STOP_DATA_ACQ"});
     });
 };
 

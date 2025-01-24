@@ -4,14 +4,46 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SMOTSS DEVELOPER CONSOLE</title>
-        
+        <link rel="stylesheet" href="style/style.css">    
     </head>
-    <body>
-        <button id ="btn-start">Start</button>
-        <button id ="btn-stop">Stop</button>
-        <button id="btn-send-config">Send Config</button>
-        <h1 id="h-title">Tonto el que lo lea</h1>
+
+    <body>     
+        <div class="container">
+            <!-- Define status screen -->
+            <div id="acq-status" class="screen">
+                <div class="header">
+                    <div class="logo">LOGO</div>
+                    <h1>ACQ STATUS</h1>
+                    <div class="status-devices">
+                        <div id="connection-indicator" class="circle">SERVER</div>
+                        <div id="hub-status" class="circle">Hub Status</div>
+                        <div id="wristband-status" class="circle">Wristband Status</div>
+                        <div id="caschetto-status" class="circle">Caschetto Status</div>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <button class="stop-btn">STOP</button>
+                    <div class="info">
+                        <p>Acq freq</p>
+                        <p>Acq gain</p>
+                        <p>Acq source</p>
+                        <p>User ID</p>
+                        <p>Hub ID</p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Define configuration screen -->
+            <div id="acq-configuration" class="screen">
+                <h1>ACQ CONFIGURATION</h1>
+                <button id ="btn-start">START</button>
+                <button id="btn-send-config-caschetto">SEND</button>
+                <button id="btn-send-config-wristband">SEND</button>
+            </div>
+        </div>
     </body>
+    
     <script src="src/lib/socket_io.min.js"></script>
     <script src="src/constants.js"></script>
     <script src="src/UIElements.js"></script>

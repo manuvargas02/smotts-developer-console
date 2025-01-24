@@ -3,7 +3,7 @@ class Constants {
         return "SMOTTS DEVELOPER CONSOLE";
     }
 
-    static get serverIP() {
-        return "localhost";
+    static get socket() {
+        return io.connect("http://localhost:8000");
     }
 }

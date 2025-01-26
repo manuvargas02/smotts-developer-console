@@ -7,6 +7,10 @@ class UI {
         return document.getElementById("btn-stop");
     }
 
+    static get btnTestBci(){
+        return document.getElementById("btn-test-bci");
+    }
+
     static get connectionIndicator(){
         return document.getElementById("connection-indicator");
     }
@@ -15,8 +19,8 @@ class UI {
         return document.getElementById("hub-status");
     }
 
-    static get caschettoIndicator(){
-        return document.getElementById("caschetto-status");
+    static get bciIndicator(){
+        return document.getElementById("bci-status");
     }
 
     static get wristIndicator(){

@@ -9,12 +9,12 @@ socket.on("disconnect", (reason) => {
     UI.connectionIndicator.style.backgroundColor = "#F00"
 });
 
-socket.on("caschetto_status", (status) => {
-    console.log("Caschetto status: ", status);
+socket.on("bci_status", (status) => {
+    console.log("BCI status: ", status);
     if (status == "on"){
-        UI.caschettoIndicator.style.backgroundColor = "#0F0";
+        UI.bciIndicator.style.backgroundColor = "#0F0";
     } else {
-        UI.caschettoIndicator.style.backgroundColor = "#F00";
+        UI.bciIndicator.style.backgroundColor = "#F00";
     }
 });
 
@@ -36,17 +36,25 @@ socket.on("hub_status", (status) => {
     }
 });
 
+
+
 function main(){
     UI.connectionIndicator.style.backgroundColor = "#F00"
-    UI.btnStart.addEventListener("click", ()=>{
+    UI.btnStart.addEventListener("click", () => {
         console.log("Start");
-        socket.emit("app_data_handler", {"operation": "START_DATA_ACQ"});
+        socket.emit("START", {});  
     });
-    
-    UI.btnStop.addEventListener("click", ()=>{
+
+    UI.btnStop.addEventListener("click", () => {
         console.log("Stop");
-        socket.emit("app_data_handler", {"operation": "STOP_DATA_ACQ"});
+        socket.emit("STOP", {});  
     });
+
+    UI.btnTestBci.addEventListener("click", () => { 
+        console.log("Test BCI");
+        socket.emit("TEST_BCI_ELECTRODES", {});
+    });
+
 };
 
 document.addEventListener("DOMContentLoaded", () => main());

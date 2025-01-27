@@ -1,39 +1,32 @@
 socket = Constants.socket;
 socket.on("connect", () => {
     console.log("Connecting to server...");
-    UI.connectionIndicator.style.backgroundColor = "#0F0"
+    UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#0F0"
+    UIAcqStatus.connectionIndicator.style.backgroundColor = "#0F0"
 });
 
 socket.on("disconnect", (reason) => {
     console.log("Disconnecting from the server...")
-    UI.connectionIndicator.style.backgroundColor = "#F00"
+    UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00"
+    UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00"
 });
 
-socket.on("bci_status", (status) => {
-    console.log("BCI status: ", status);
-    if (status == "on"){
-        UI.bciIndicator.style.backgroundColor = "#0F0";
-    } else {
-        UI.bciIndicator.style.backgroundColor = "#F00";
-    }
+socket.on("STATUS_HUB", (data) => {
+    const parsedData = JSON.parse(data);
+    console.log("Hub status:", parsedData.status);
+    DeviceStatus.getHubStatus(parsedData.status);
 });
 
-socket.on("wrist_status", (status) => {
-    console.log("Wrist status: ", status);
-    if (status == "on"){
-        UI.wristIndicator.style.backgroundColor = "#0F0";
-    } else {
-        UI.wristIndicator.style.backgroundColor = "#F00";
-    }
+socket.on("STATUS_BCI", (data) => {
+    const parsedData = JSON.parse(data); 
+    console.log("BCI status:", parsedData.status);
+    DeviceStatus.getBciStatus(parsedData.status);
 });
 
-socket.on("hub_status", (status) => {
-    console.log("Hub status: ", status);
-    if (status == "on"){
-        UI.hubIndicator.style.backgroundColor = "#0F0";
-    } else {
-        UI.hubIndicator.style.backgroundColor = "#F00";
-    }
+socket.on("STATUS_WRISTBAND", (data) => {
+    const parsedData = JSON.parse(data);
+    console.log("Wristband status:", parsedData.status);
+    DeviceStatus.getWristbandStatus(parsedData.status);
 });
 
 

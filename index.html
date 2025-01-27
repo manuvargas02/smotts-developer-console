@@ -15,10 +15,10 @@
                     <div class="logo">LOGO</div>
                     <h1>ACQ STATUS</h1>
                     <div class="status-devices">
-                        <div id="connection-indicator" class="circle">SERVER</div>
-                        <div id="hub-status" class="circle">Hub Status</div>
-                        <div id="wristband-status" class="circle">Wristband Status</div>
-                        <div id="caschetto-status" class="circle">Caschetto Status</div>
+                        <div id="connection-indicator-1" class="circle">SERVER</div>
+                        <div id="hub-status-1" class="circle">Hub Status</div>
+                        <div id="wristband-status-1" class="circle">Wristband Status</div>
+                        <div id="bci-status-1" class="circle">Bci Status</div>
                     </div>
                 </div>
                 <div class="sidebar">
@@ -38,15 +38,25 @@
             <div id="acq-configuration" class="screen">
                 <h1>ACQ CONFIGURATION</h1>
                 <button id ="btn-start">START</button>
-                <button id="btn-send-config-caschetto">SEND</button>
+                <button id="btn-send-config-bci">SEND</button>
                 <button id="btn-send-config-wristband">SEND</button>
                 <button id="btn-test-bci">Test bci electrodes</button>
+                <div class="status-devices">
+                    <div id="connection-indicator-2" class="circle">SERVER</div>
+                    <div id="hub-status-2" class="circle">Hub Status</div>
+                    <div id="wristband-status-2" class="circle">Wristband Status</div>
+                    <div id="bci-status-2" class="circle">Bci Status</div>
+                </div>
             </div>
         </div>
     </body>
     
     <script src="src/lib/socket_io.min.js"></script>
     <script src="src/constants.js"></script>
-    <script src="src/UIElements.js"></script>
+    <script src="src/resources/devices-status.js"></script>
+    <script src="src/acq-configuration/acq-configuration.js"></script>
+    <script src="src/acq-configuration/UIElements.js"></script>
+    <script src="src/acq-status/acq-status.js"></script>
+    <script src="src/acq-status/UIElements.js"></script>
     <script src="src/app.js"></script>
 </html>

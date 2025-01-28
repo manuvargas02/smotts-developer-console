@@ -1,30 +1,26 @@
 const wsManager = new WebSocketManager(Constants.serverIP, Constants.serverPort);
+const AcqStatus = new AcqStatusScreen(wsManager.socket);
+const AcqConfiguration = new AcqConfigurationScreen(wsManager.socket);
 
-wsManager.connect();
-wsManager.disconnect();
-wsManager.hubStatus();
-wsManager.bciStatus();
-wsManager.wristbandStatus();
+//Call the methods of the Acq Status Screen
+AcqStatus.connect();
+AcqStatus.disconnect();
+AcqStatus.hubStatus();
+AcqStatus.bciStatus();
+AcqStatus.wristbandStatus();
+
+//Call the methods of the Acq Configuration Screen
+AcqConfiguration.connect();
+AcqConfiguration.disconnect();
+AcqConfiguration.hubStatus();
+AcqConfiguration.bciStatus();
+AcqConfiguration.wristbandStatus();
 
 
 
 function main(){
-    UI.connectionIndicator.style.backgroundColor = "#F00"
-    UI.btnStart.addEventListener("click", () => {
-        console.log("Start");
-        socket.emit("START", {});  
-    });
-
-    UI.btnStop.addEventListener("click", () => {
-        console.log("Stop");
-        socket.emit("STOP", {});  
-    });
-
-    UI.btnTestBci.addEventListener("click", () => { 
-        console.log("Test BCI");
-        socket.emit("TEST_BCI_ELECTRODES", {});
-    });
-
+    AcqStatus.stop();
+    AcqConfiguration.setBciConfiguration();
 };
 
 document.addEventListener("DOMContentLoaded", () => main());

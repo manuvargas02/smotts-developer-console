@@ -1,20 +1,17 @@
 class DeviceStatus {
-    static updateIndicator(indicator, status) {
-        indicator.style.backgroundColor = status === "connected" ? "#0F0" : "#F00";
+    static updateIndicator(screen, indicatorKey, status) {
+        screen[indicatorKey].style.backgroundColor = status === "connected" ? "#0F0" : "#F00";
     }
 
-    static getHubStatus(status) {
-        this.updateIndicator(UIAcqConfiguration.hubIndicator, status);
-        this.updateIndicator(UIAcqStatus.hubIndicator, status);
-    };
+    static getHubStatus(screen, status) {
+        this.updateIndicator(screen, "hubIndicator", status);
+    }
 
-    static getBciStatus(status) {
-        this.updateIndicator(UIAcqConfiguration.bciIndicator, status);
-        this.updateIndicator(UIAcqStatus.bciIndicator, status);
-    };
+    static getBciStatus(screen, status) {
+        this.updateIndicator(screen, "bciIndicator", status);
+    }
 
-    static getWristbandStatus(status) {
-        this.updateIndicator(UIAcqConfiguration.wristIndicator, status);
-        this.updateIndicator(UIAcqStatus.wristIndicator, status);
-    };
-};
+    static getWristbandStatus(screen, status) {
+        this.updateIndicator(screen, "wristIndicator", status);
+    }
+}

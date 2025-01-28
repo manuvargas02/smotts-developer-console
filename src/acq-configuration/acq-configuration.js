@@ -55,15 +55,6 @@ class AcqConfigurationScreen {
             const config = ConfigPanel.setConfig("bci");
             console.log(config);
             this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify(config));
-            this.socket.on("BCI_ACQ_CONFIG", (response) => {
-                const parsedResponse = JSON.parse(response);
-                
-                if (parsedResponse.success) {
-                    console.log("BCI Configuration set successfully!");
-                } else {
-                    console.log("Failed to set BCI Configuration.");
-                }
-            });
         });
     };
 
@@ -81,6 +72,31 @@ class AcqConfigurationScreen {
                     console.log("Failed to set Wristband Configuration.");
                 }
             });
+        });
+    };
+
+    getBciConfiguration() {
+        UIAcqConfiguration.getBciConfig.addEventListener("click", () => {
+            console.log("Getting BCI configuration...");
+            this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify({ operation: "get_config"}));
+        });
+        this.socket.on("BCI_ACQ_CONFIG", (response) => {
+            const parsedResponse = JSON.parse(response);
+            console.log(parsedResponse);    
+            if (parsedResponse.operation === "get_config") {
+                ConfigPanel.getConfig("bci", parsedResponse.data);
+            } 
+        });
+    };
+
+    getWristbandConfiguration() {
+        UIAcqConfiguration.getWristbandConfig.addEventListener("click", () => {
+            console.log("Getting Wristband configuration...");
+            this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify({ operation: "get_config"}));
+        });
+        this.socket.on("WRISTBAND_ACQ_CONFIG", (response) => {
+            const parsedResponse = JSON.parse(response);
+            ConfigPanel.getConfig("wristband", parsedResponse.data);
         });
     };
 

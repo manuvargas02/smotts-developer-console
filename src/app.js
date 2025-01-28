@@ -21,6 +21,7 @@ AcqConfiguration.wristbandStatus();
 function main(){
     AcqStatus.stop();
     AcqConfiguration.setBciConfiguration();
+    AcqConfiguration.getBciConfiguration();
 };
 
 document.addEventListener("DOMContentLoaded", () => main());

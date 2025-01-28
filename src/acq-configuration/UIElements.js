@@ -47,6 +47,12 @@ class UIAcqConfiguration {
        return document.getElementById("send-btn-wristband");
    }
 
+   static get getBciConfig(){
+         return document.getElementById("get-btn-bci");
+    }
 
+    static get getWristbandConfig(){
+        return document.getElementById("get-btn-wristband");
+    }
 }
 

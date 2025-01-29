@@ -9,9 +9,9 @@
 
     <body>     
         <div class="container">
-            <!-- DEFINE STATUS SCREEN -->
+            <!-- STATUS SCREEN -->
             <div id="acq-status" class="screen">
-                <!-- Header with devices status -->
+                <!-- Header with device statuses -->
                 <div class="header">
                     <div class="logo">LOGO</div>
                     <h1>ACQ STATUS</h1>
@@ -34,20 +34,32 @@
                         </div>
                     </div>
                 </div>
-                <!-- Electrodes signals -->
-                <div class="sidebar">
+                <!-- Status Information Block -->
+                <div class="status-info">
                     <button id="btn-stop" class="stop-btn">STOP</button>
-                    <div class="info">
-                        <p>Acq freq</p>
-                        <p>Acq gain</p>
-                        <p>Acq source</p>
-                        <p>User ID</p>
-                        <p>Hub ID</p>
+                    <div class="info-container">
+                        <h3>System Status</h3>
+                        <div class="info-item"><strong>BCI Status:</strong> <span id="bci-status-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Status:</strong> <span id="wristband-status-info">-</span></div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Frequency:</strong> <span id="bci-freq-info">-</span> Hz</div>
+                        <div class="info-item"><strong>Wristband Frequency:</strong> <span id="wristband-freq-info">-</span> Hz</div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Gain:</strong> <span id="bci-gain-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Gain:</strong> <span id="wristband-gain-info">-</span></div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Channels:</strong> <span id="bci-channels-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Channels:</strong> <span id="wristband-channels-info">-</span></div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- DEFINE CONFIGURATION SCREEN -->
+
+
+
+            
+            <!-- CONFIGURATION SCREEN -->
             <div id="acq-configuration" class="screen">
                 <!-- Header with devices status -->
                 <div class="header">
@@ -73,9 +85,8 @@
                     </div>
                 </div>
 
-                <!-- Configuration pannels -->
+                <!-- Configuration panels -->
                 <div class="acq-config-container">
-                    
                     <!-- BCI Config -->
                     <div class="acq-config">
                         <h3>BCI acq config</h3>
@@ -88,7 +99,7 @@
                                     <option value="1000">1000 Hz</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="gain-bci">Gain</label>
                                 <select id="gain-bci">
@@ -97,7 +108,7 @@
                                     <option value="2">2</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="input-type-bci">Input type</label>
                                 <select id="input-type-bci">
@@ -105,17 +116,17 @@
                                     <option value="test2">Test 2</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="channels-bci">Channels</label>
                                 <input type="text" id="channels-bci" placeholder="">
                             </div>
-                
+
                             <button id="send-btn-bci" class="send-btn">SEND</button>
                             <button id="get-btn-bci" class="send-btn">GET</button>
                         </div>
                     </div>
-                
+
                     <!-- Wristband Config -->
                     <div class="acq-config">
                         <h3>Wristband acq config</h3>
@@ -128,7 +139,7 @@
                                     <option value="1000">1000 Hz</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="gain-wristband">Gain</label>
                                 <select id="gain-wristband">
@@ -137,7 +148,7 @@
                                     <option value="2">2</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="input-type-wristband">Input type</label>
                                 <select id="input-type-wristband">
@@ -145,29 +156,63 @@
                                     <option value="test2">Test 2</option>
                                 </select>
                             </div>
-                
+
                             <div class="config-group">
                                 <label for="channels-wristband">Channels</label>
                                 <input type="text" id="channels-wristband" placeholder="">
                             </div>
-                
+
                             <button id="send-btn-wristband" class="send-btn">SEND</button>
                             <button id="get-btn-wristband" class="send-btn">GET</button>
                         </div>
                     </div>
-                </div>
-                
+                    <!-- Electrodes Test -->
+                    <div class="electrodes-test-container">
+                        <!-- BCI Electrodes -->
+                        <div class="electrode-section">
+                            <button id="test-btn-bci" class="test-btn">Test Bci Electrodes</button>
+                            <div class="electrode-container">
+                                <div id="bci-electrode-1" class="electrode"></div>
+                                <div id="bci-electrode-2" class="electrode"></div>
+                                <div id="bci-electrode-3" class="electrode"></div>
+                                <div id="bci-electrode-4" class="electrode"></div>
+                                <div id="bci-electrode-5" class="electrode"></div>
+                                <div id="bci-electrode-6" class="electrode"></div>
+                                <div id="bci-electrode-7" class="electrode"></div>
+                                <div id="bci-electrode-8" class="electrode"></div>
+                            </div>
+                        </div>
 
+                        <!-- Wristband Electrodes -->
+                        <div class="electrode-section">
+                            <button id="test-btn-wristband" class="test-btn">Test Wristband Electrodes</button>
+                            <div class="electrode-container">
+                                <div id="wristband-electrode-1" class="electrode"></div>
+                                <div id="wristband-electrode-2" class="electrode"></div>
+                                <div id="wristband-electrode-3" class="electrode"></div>
+                                <div id="wristband-electrode-4" class="electrode"></div>
+                                <div id="wristband-electrode-5" class="electrode"></div>
+                                <div id="wristband-electrode-6" class="electrode"></div>
+                                <div id="wristband-electrode-7" class="electrode"></div>
+                                <div id="wristband-electrode-8" class="electrode"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-start" class="start-btn">START</button>
+                </div>
+            </div>   
+        </div>
+
+        <!-- Scripts -->
+        <script src="src/lib/socket_io.min.js"></script>
+        <script src="src/constants.js"></script>
+        <script src="src/resources/devices-status.js"></script>
+        <script src="src/resources/param-conf-pannels.js"></script>
+        <script src="src/websocket_manager.js"></script>
+        <script src="src/acq-configuration/acq-configuration.js"></script>
+        <script src="src/acq-configuration/UIElements.js"></script>
+        <script src="src/acq-status/acq-status.js"></script>
+        <script src="src/acq-status/UIElements.js"></script>
+        <script src="src/app.js"></script>
     </body>
-    
-    <script src="src/lib/socket_io.min.js"></script>
-    <script src="src/constants.js"></script>
-    <script src="src/resources/devices-status.js"></script>
-    <script src="src/resources/param-conf-pannels.js"></script>
-    <script src="src/websocket_manager.js"></script>
-    <script src="src/acq-configuration/acq-configuration.js"></script>
-    <script src="src/acq-configuration/UIElements.js"></script>
-    <script src="src/acq-status/acq-status.js"></script>
-    <script src="src/acq-status/UIElements.js"></script>
-    <script src="src/app.js"></script>
 </html>

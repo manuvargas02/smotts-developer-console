@@ -44,7 +44,6 @@ class AcqStatusScreen {
 
     stop() {
         UIAcqStatus.btnStop.addEventListener("click", () => {
-            console.log("Stop");
             this.socket.emit("STOP", '{"stop": true}');
             this.socket.on("STOP", (data) => {
                 const parsedResponse = JSON.parse(data);
@@ -55,5 +54,5 @@ class AcqStatusScreen {
                 }
             });
         });
-    }
+    };
 };

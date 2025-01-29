@@ -19,5 +19,14 @@ class ConfigPanel {
         UIAcqConfiguration[`${device_panel}ConfigButtons`].input_type.value = config.input_type;
         UIAcqConfiguration[`${device_panel}ConfigButtons`].channel.value = config.channels;
     };
+
+    static testElectrodes(device, data) {
+        const electrodes = UIAcqConfiguration[`btn${device}Electrodes`];
+        console.log("Electrode Status:", data);
+        electrodes.forEach((electrode, index) => {
+            electrode.style.backgroundColor = data[index] ? "green" : "red";
+        });
+    }
+    
 };
 

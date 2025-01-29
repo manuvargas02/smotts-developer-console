@@ -20,8 +20,13 @@ AcqConfiguration.wristbandStatus();
 
 function main(){
     AcqStatus.stop();
+    AcqConfiguration.start();
+    AcqConfiguration.testBciElectrodes();
+    AcqConfiguration.testWristbandElectrodes();
     AcqConfiguration.setBciConfiguration();
     AcqConfiguration.getBciConfiguration();
+    AcqConfiguration.setWristbandConfiguration();
+    AcqConfiguration.getWristbandConfiguration();
 };
 
 document.addEventListener("DOMContentLoaded", () => main());

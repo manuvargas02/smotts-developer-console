@@ -3,10 +3,6 @@ class UIAcqConfiguration {
         return document.getElementById("btn-start");
    }
    
-   static get btnTestBci(){
-       return document.getElementById("btn-test-bci");
-   }
-
    static get connectionIndicator(){
        return document.getElementById("connection-indicator-2");
    }
@@ -39,20 +35,55 @@ class UIAcqConfiguration {
         return {freq, gain, input_type, channel};
     }
 
-   static get sendBciConfig(){
+   static get btnSendBciConfig(){
        return document.getElementById("send-btn-bci");
    }
 
-   static get sendWristbandConfig(){
+   static get btnSendWristbandConfig(){
        return document.getElementById("send-btn-wristband");
    }
 
-   static get getBciConfig(){
+   static get btnGetBciConfig(){
          return document.getElementById("get-btn-bci");
     }
 
-    static get getWristbandConfig(){
+    static get btnGetWristbandConfig(){
         return document.getElementById("get-btn-wristband");
     }
+
+    static get btnTestBci(){
+        return document.getElementById("test-btn-bci");
+    }
+
+    static get btnTestWristband(){
+        return document.getElementById("test-btn-wristband");
+    }
+
+    static get btnBciElectrodes(){
+        return [
+            document.getElementById("bci-electrode-1"),
+            document.getElementById("bci-electrode-2"),
+            document.getElementById("bci-electrode-3"),
+            document.getElementById("bci-electrode-4"),
+            document.getElementById("bci-electrode-5"),
+            document.getElementById("bci-electrode-6"),
+            document.getElementById("bci-electrode-7"),
+            document.getElementById("bci-electrode-8"),
+        ];
+    }
+
+    static get btnWristbandElectrodes(){
+        return [
+            document.getElementById("wristband-electrode-1"),
+            document.getElementById("wristband-electrode-2"),
+            document.getElementById("wristband-electrode-3"),
+            document.getElementById("wristband-electrode-4"),
+            document.getElementById("wristband-electrode-5"),
+            document.getElementById("wristband-electrode-6"),
+            document.getElementById("wristband-electrode-7"),
+            document.getElementById("wristband-electrode-8"),
+        ];
+    }
+
 }
 

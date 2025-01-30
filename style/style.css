@@ -22,7 +22,6 @@ body {
 .screen {
     min-width: 100px;
     height: 50%;
-    flex-direction: row;
     background-color: white;
     margin: 10px;
     border-radius: 20px;
@@ -36,7 +35,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
     background-color: white;
     border-top: 2px solid ;
     border-left: 2;
@@ -65,7 +63,6 @@ body {
 }
 
 .sidebar {
-    grid-area: sidebar;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -95,7 +92,12 @@ body {
     background-color: #668566;
 }
 
-/*Data information*/
+.status-container {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
 
 /* Status Information Block */
 .status-info {

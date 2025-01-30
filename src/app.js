@@ -20,6 +20,8 @@ AcqConfiguration.wristbandStatus();
 
 function main(){
     AcqStatus.stop();
+    AcqStatus.getStudyData();
+    
     AcqConfiguration.start();
     AcqConfiguration.testBciElectrodes();
     AcqConfiguration.testWristbandElectrodes();

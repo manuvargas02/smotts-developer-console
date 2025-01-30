@@ -21,7 +21,6 @@ class AcqStatusScreen {
     hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("Hub status:", parsedData.status);
             DeviceStatus.getHubStatus(UIAcqStatus, parsedData.status);
         });
     };
@@ -29,7 +28,6 @@ class AcqStatusScreen {
     bciStatus() {
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqStatus, parsedData.status);
         });
     };
@@ -37,7 +35,6 @@ class AcqStatusScreen {
     wristbandStatus() {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("Wristband status:", parsedData.status);
             DeviceStatus.getWristbandStatus(UIAcqStatus, parsedData.status);
         });
     };
@@ -55,4 +52,12 @@ class AcqStatusScreen {
             });
         });
     };
+
+    getStudyData() {
+        this.socket.on("STUDY_DATA", (data) => {
+            const parsedData = JSON.parse(data);
+            DeviceStatus.getStudyData(parsedData.data);
+        });
+    }
+
 };

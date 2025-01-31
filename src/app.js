@@ -21,6 +21,7 @@ AcqConfiguration.wristbandStatus();
 function main(){
     AcqStatus.stop();
     AcqStatus.getStudyData();
+    AcqStatus.createElectrodeGraph("myChart", "Fp1", 5, -100, 100)
     
     AcqConfiguration.start();
     AcqConfiguration.testBciElectrodes();

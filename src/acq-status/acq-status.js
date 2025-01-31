@@ -60,4 +60,14 @@ class AcqStatusScreen {
         });
     }
 
+    createElectrodeGraph(html_element, electrode, max_points, y_min, y_max, width, height, border_radius, bg_color, line_color, x_legend, y_legend, line_width) {
+        const graph = new ElectrodeGraph(html_element, max_points, y_min, y_max, width, height, border_radius, bg_color, line_color, x_legend, y_legend, line_width);
+        this.socket.on("EEG_DATA", (data) => {
+            const parsedData = JSON.parse(data);
+            let electrodeData = parsedData.data[electrode];
+            graph.addPoints(electrodeData);
+            console.log(electrodeData);
+        });
+    }
+
 };

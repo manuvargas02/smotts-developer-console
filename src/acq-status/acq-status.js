@@ -1,7 +1,7 @@
 class AcqStatusScreen {
     constructor(socket) {
         this.socket = socket;
-        UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00";
+        //UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00";
     };
 
     connect() {
@@ -52,6 +52,13 @@ class AcqStatusScreen {
             });
         });
     };
+    
+    clearGraph() {
+        UIAcqStatus.btnClear.addEventListener("click", () => {
+            ElectrodeGraph.clearGraph();
+            console.log("Graph cleared!");
+        });
+    }
 
     getStudyData() {
         this.socket.on("STUDY_DATA", (data) => {
@@ -66,7 +73,14 @@ class AcqStatusScreen {
             const parsedData = JSON.parse(data);
             let electrodeData = parsedData.data[electrode];
             graph.addPoints(electrodeData);
-            console.log(electrodeData);
+        });
+        return graph;
+    }
+
+    clearGraph(graph) {
+        UIAcqStatus.btnClear.addEventListener("click", () => {
+            graph.clear();
+            console.log("Graph cleared!");
         });
     }
 

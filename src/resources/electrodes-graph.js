@@ -1,42 +1,39 @@
 class ElectrodeGraph {
-    constructor(html_element, max_points, y_min, y_max, width = 700, height = 400, border_radius = 8, bg_color = '#F5F5F5', line_color = '#E63946', x_legend = "t (ms)", y_legend = "mV", line_width = 2, x_ticks = 11) {
-        this.canvas = document.getElementById(html_element);
-        this.bg_color = bg_color;
-        this.border_radius = border_radius;
-        this.line_color = line_color;
-        this.x_legend = x_legend;
-        this.y_legend = y_legend;
-        this.line_width = line_width;
-        this.max_points = max_points;
-        this.y_min = y_min;
-        this.y_max = y_max;
+    constructor(htmlElement, maxPoints, yMin, yMax, width = 900, height = 400, borderRadius = 8, bgColor = '#F5F5F5', lineColor = '#E63946', xLegend = "samples", yLegend = "mV", lineWidth = 2, xTicks = 5) {
+        this.canvas = document.getElementById(htmlElement);
+        this.bgColor = bgColor;
+        this.borderRadius = borderRadius;
+        this.lineColor = lineColor;
+        this.xLegend = xLegend;
+        this.yLegend = yLegend;
+        this.lineWidth = lineWidth;
+        this.maxPoints = maxPoints;
+        this.yMin = yMin;
+        this.yMax = yMax;
         this.width = width;
         this.height = height;
-        this.x_value = 0;
-        this.x_ticks = x_ticks;
-        this.dataQueue = []; 
+        this.xValue = 0;
+        this.xTicks = xTicks;
 
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.canvas.style.borderRadius = `${this.border_radius}px`;
-        this.canvas.style.backgroundColor = this.bg_color;
+        this.canvas.style.borderRadius = `${this.borderRadius}px`;
+        this.canvas.style.backgroundColor = this.bgColor;
 
         this.chart = new Chart(this.canvas, {
             type: 'line',
             data: {
-                labels: Array.from({ length: this.max_points }, (_, i) => i),
+                labels: Array.from({ length: this.maxPoints }, (_, i) => i),
                 datasets: [
                     {
-                        label: "Señal EEG",
-                        data: new Array(this.max_points).fill(null),
-                        borderColor: this.line_color,
-                        borderWidth: this.line_width,
+                        data: new Array(this.maxPoints).fill(null),
+                        borderColor: this.lineColor,
+                        borderWidth: this.lineWidth,
                         tension: 0.6,
                         pointRadius: 0,
                         fill: false
                     },
                     {
-                        label: "Línea Vertical",
                         data: [null, null],
                         borderColor: "#000",
                         borderWidth: 2,
@@ -53,57 +50,60 @@ class ElectrodeGraph {
                 },
                 scales: {
                     x: {
-                        title: { display: true, text: this.x_legend, color: "#333", font: { size: 14 } },
-                        grid: { color: "rgba(0, 0, 0, 0.1)" },
+                        title: { display: true, text: this.xLegend, color: "#333", font: { size: 14 } },
+                        grid: { display: false },
+                        ticks: {
+                            display: false,
+                        }
                     },
                     y: {
-                        min: this.y_min,
-                        max: this.y_max,
-                        title: { display: true, text: this.y_legend, color: "#333", font: { size: 14 } },
-                        grid: { color: "rgba(0, 0, 0, 0.1)" }
+                        min: this.yMin,
+                        max: this.yMax,
+                        title: { display: true, text: this.yLegend, color: "#333", font: { size: 14 } },
+                        grid: { color: "rgba(0, 0, 0, 0.1)" },
+                        ticks: { 
+                            display: false, 
+                        }
                     }
                 }
             }
         });
-
-        this.processingQueue = false;
     }
 
-    addPoint(y_value) {
-        if (this.chart.data.datasets[0].data.length < this.max_points) {
-            this.chart.data.labels.push(this.x_value);
-            this.chart.data.datasets[0].data.push(y_value);
+    addPoint(yValue) {
+        if (this.chart.data.datasets[0].data.length < this.maxPoints) {
+            this.chart.data.labels.push(this.xValue);
+            this.chart.data.datasets[0].data.push(yValue);
         } else {
-            let index = this.x_value % this.max_points;
-            this.chart.data.datasets[0].data[index] = y_value;
-            this.chart.data.labels[index] = this.x_value;
+            let index = this.xValue % this.maxPoints;
+            this.chart.data.datasets[0].data[index] = yValue;
+            this.chart.data.labels[index] = this.xValue;
         }
-        this.updateVerticalLine();
-        this.x_value++;
+        this._updateVerticalLine();
+        this.chart.update(); 
+        this.xValue++;
     }
 
-    addPoints(y_values, delay = 60) {
-        this.dataQueue.push(...y_values);
-        if (!this.processingQueue) {
-            this.processQueue(delay);
-        }
+    addPoints(yValues) {
+        yValues.forEach(yValue => {
+            this.addPoint(yValue); 
+        });
     }
-
-    processQueue(delay) {
-        if (this.dataQueue.length === 0) {
-            this.processingQueue = false;
-            return;
-        }
-        this.processingQueue = true;
-        this.addPoint(this.dataQueue.shift());
-        setTimeout(() => this.processQueue(delay), delay);
-    }
-
-    updateVerticalLine() {
+    
+    _updateVerticalLine() {
         this.chart.data.datasets[1].data = [
-            { x: this.x_value, y: this.y_min },
-            { x: this.x_value, y: this.y_max }
+            { x: this.xValue, y: this.yMin },
+            { x: this.xValue, y: this.yMax }
         ];
         this.chart.update();
+    }
+
+    clear() {
+        this.chart.data.labels = Array.from({ length: this.maxPoints }, (_, i) => i);
+        this.chart.data.datasets[0].data = new Array(this.maxPoints).fill(null);
+        this.chart.data.datasets[1].data = [null, null]; 
+        this.xValue = 0;  
+        this.chart.update();
+        console.log("Graph cleared!");
     }
 }

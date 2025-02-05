@@ -53,7 +53,10 @@
                             <div class="info-item"><strong>Wristband Channels:</strong> <span id="wristband-channels-info">-</span></div>
                         </div>
                     </div>
-                    <canvas id="myChart"></canvas>
+                    <div class = "graph-container">
+                            <button id="btn-clear">CLEAR GRAPHS</button>
+                            <canvas id="myChart"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -206,6 +209,7 @@
         </div>
         
         <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="src/lib/socket_io.min.js"></script>
         <script src="src/constants.js"></script>
         <script src="src/resources/devices-status.js"></script>
@@ -217,8 +221,6 @@
         <script src="src/acq-status/UIElements.js"></script>
         <script src="src/resources/electrodes-graph.js"></script>
         <script src="src/app.js"></script>
-        <!-- Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         
     </body>
 </html>

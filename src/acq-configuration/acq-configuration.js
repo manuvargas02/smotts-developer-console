@@ -1,7 +1,7 @@
 class AcqConfigurationScreen {
     constructor(socket) {
         this.socket = socket;
-        UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
+        //UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
     };
 
     connect() {

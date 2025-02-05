@@ -18,6 +18,10 @@ class UIAcqStatus {
     static get wristIndicator(){
         return document.getElementById("wristband-status-1");
     }
+
+    static get btnClear(){  
+        return document.getElementById("btn-clear");
+    }
     
     static get studyData(){
             let bci_status = document.getElementById("bci-status-info");

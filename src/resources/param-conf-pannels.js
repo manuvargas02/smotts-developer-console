@@ -1,32 +1,49 @@
+/**
+ * Class responsible for managing device configuration and electrode testing.
+ */
 class ConfigPanel {
-    static setConfig(device_panel) {
+    /**
+     * Sets the configuration for a specific device panel.
+     * @param {string} devicePanel - The name of the device panel.
+     * @returns {Object} An object containing the operation type and configuration data for the device.
+     */
+    static setConfig(devicePanel) {
         const config = {
-            freq: parseInt((UIAcqConfiguration[`${device_panel}ConfigButtons`].freq).value,10),
-            gain: parseInt((UIAcqConfiguration[`${device_panel}ConfigButtons`].gain).value,10),
-            input_type: (UIAcqConfiguration[`${device_panel}ConfigButtons`].input_type).value,
-            channels: parseInt((UIAcqConfiguration[`${device_panel}ConfigButtons`].channel).value,16), 
+            freq: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].freq.value, 10),
+            gain: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].gain.value, 10),
+            inputType: UIAcqConfiguration[`${devicePanel}ConfigButtons`].input_type.value,
+            channels: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].channel.value, 16),
         };
 
         return {
             operation: "set_config",
             data: config
         };
-    };
-    
-    static getConfig(device_panel, config) {
-        UIAcqConfiguration[`${device_panel}ConfigButtons`].freq.value = config.freq;
-        UIAcqConfiguration[`${device_panel}ConfigButtons`].gain.value = config.gain;
-        UIAcqConfiguration[`${device_panel}ConfigButtons`].input_type.value = config.input_type;
-        UIAcqConfiguration[`${device_panel}ConfigButtons`].channel.value = config.channels;
-    };
+    }
 
+    /**
+     * Updates the html elements with the provided configuration for a device panel.
+     * @param {string} devicePanel - The name of the device panel.
+     * @param {Object} config - The configuration data to apply.
+     */
+    static getConfig(devicePanel, config) {
+        UIAcqConfiguration[`${devicePanel}ConfigButtons`].freq.value = config.freq;
+        UIAcqConfiguration[`${devicePanel}ConfigButtons`].gain.value = config.gain;
+        UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value = config.inputType;
+        UIAcqConfiguration[`${devicePanel}ConfigButtons`].channel.value = config.channels;
+    }
+
+    /**
+     * Tests electrodes for a given device and updates their visual representation.
+     * @param {string} device - The name of the device being tested.
+     * @param {Array<boolean>} data - An array indicating the status of each electrode (true for active, false for inactive).
+     */
     static testElectrodes(device, data) {
         const electrodes = UIAcqConfiguration[`btn${device}Electrodes`];
         console.log("Electrode Status:", data);
+
         electrodes.forEach((electrode, index) => {
             electrode.style.backgroundColor = data[index] ? "green" : "red";
         });
     }
-    
-};
-
+}

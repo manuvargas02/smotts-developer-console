@@ -52,13 +52,6 @@ class AcqStatusScreen {
             });
         });
     };
-    
-    clearGraph() {
-        UIAcqStatus.btnClear.addEventListener("click", () => {
-            ElectrodeGraph.clearGraph();
-            console.log("Graph cleared!");
-        });
-    }
 
     getStudyData() {
         this.socket.on("STUDY_DATA", (data) => {
@@ -83,5 +76,30 @@ class AcqStatusScreen {
             console.log("Graph cleared!");
         });
     }
+
+    sendConsoleMessage(console) {
+        this.socket.on("LOG_CONSOLE", (data) => {
+            try {
+                const parsedData = JSON.parse(data);
+    
+                if (parsedData["operation"] === "info") {
+                    console.addInfo(parsedData["data"]);
+                } 
+                else if (parsedData["operation"] === "warning") {
+                    console.addWarning(parsedData["data"]);
+                } 
+                else if (parsedData["operation"] === "error") {
+                    console.addError(parsedData["data"]);
+                } 
+                else {
+                    console.addSuccess(parsedData["data"]);
+                }
+            } catch (error) {
+                console.addError(`Error receiving console data: ${error.message}`);
+            }
+        });
+    }
+    
+
 
 };

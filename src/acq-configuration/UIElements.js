@@ -22,17 +22,17 @@ class UIAcqConfiguration {
    static get bciConfigButtons(){
         let freq = document.getElementById("freq-bci");
         let gain = document.getElementById("gain-bci");
-        let input_type = document.getElementById("input-type-bci");
+        let inputType = document.getElementById("input-type-bci");
         let channel = document.getElementById("channels-bci");
-        return {freq, gain, input_type, channel};
+        return {freq, gain, inputType, channel};
    }
 
    static get wristbandConfigButtons(){
         let freq = document.getElementById("freq-wristband");
         let gain = document.getElementById("gain-wristband");
-        let input_type = document.getElementById("input-type-wristband");
+        let inputType = document.getElementById("input-type-wristband");
         let channel = document.getElementById("channels-wristband");
-        return {freq, gain, input_type, channel};
+        return {freq, gain, inputType, channel};
     }
 
    static get btnSendBciConfig(){

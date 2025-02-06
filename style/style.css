@@ -2,14 +2,14 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: wait;
+    background-color: white;
     color: black;
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Main container that holds all elements */
 .container {
     display: flex;
     background-color: black;
@@ -19,35 +19,37 @@ body {
     width: 100vw;
 }
 
+/* Main screen area */
 .screen {
     min-width: 100px;
     height: 50%;
     background-color: white;
     margin: 10px;
     border-radius: 20px;
-
-    height: 100vh;;
+    height: 100vh;
     padding: 20px;
 }
 
+/* Header section*/
 .header {
     grid-area: header;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    border-top: 2px solid ;
-    border-left: 2;
-    border-bottom: 2px solid ;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
     margin-bottom: 3mm; 
 }
 
+/* Status indicators for connected devices */
 .status-devices {
     display: flex;
     gap: 40px;
     align-items: center;
 }
 
+/* Individual status items for each device */
 .status-item {
     display: flex;
     flex-direction: column;
@@ -55,6 +57,7 @@ body {
     text-align: center;
 }
 
+/* Circular indicator for device status */
 .circle {
     width: 40px;
     height: 40px;
@@ -62,16 +65,7 @@ body {
     border: solid black 1px;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    gap: 20px;
-    background-color: #d3d3d3;
-    padding: 20px;
-    border-radius: 10px;
-}
-
+/* Green "Start" button */
 .start-btn {
     width: 100px;
     height: 50px;
@@ -87,19 +81,20 @@ body {
     margin-left: 5%; 
 }
 
-
+/* Hover effect for Start button */
 .start-btn:hover {
     background-color: #668566;
 }
 
+/* Container for displaying device status */
 .status-container {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 100px;
 }
 
-/* Status Information Block */
+/* Information box for status details */
 .status-info {
     display: flex;
     flex-direction: column;
@@ -112,7 +107,7 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* STOP Button */
+/* Red "Stop" button */
 .stop-btn {
     width: 100%;
     height: 50px;
@@ -125,11 +120,12 @@ body {
     font-weight: bold;
 }
 
+/* Hover effect for Stop button */
 .stop-btn:hover {
     background-color: #da5a56;
 }
 
-/* Information Container */
+/* Container for general information display */
 .info-container {
     background: white;
     padding: 10px;
@@ -139,7 +135,7 @@ body {
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Section Title */
+/* Title for sections inside the info container */
 .info-container h3 {
     text-align: center;
     font-size: 16px;
@@ -148,7 +144,7 @@ body {
     font-weight: bold;
 }
 
-/* Individual Info Items */
+/* Individual information items within the info container */
 .info-item {
     font-size: 14px;
     color: #333;
@@ -157,17 +153,14 @@ body {
     margin: 5px 0;
 }
 
-/* Horizontal Separator */
+/* Horizontal line separators */
 hr {
     border: none;
     border-top: 1px solid #ddd;
     margin: 10px 0;
 }
 
-
-
-
-/*Bci and Wristband Configuraiton Pannels */
+/* Configuration panels for BCI and wristband devices */
 .acq-config-container {
     margin-top: 5px;
     display: flex;
@@ -175,6 +168,7 @@ hr {
     flex-wrap: wrap; 
 }
 
+/* Individual configuration panel */
 .acq-config {
     width: 250px;
     padding: 15px;
@@ -183,23 +177,27 @@ hr {
     background-color: #e6e6e6;
 }
 
+/* Title inside configuration panel */
 .acq-config h3 {
     text-align: center;
     font-size: 16px;
     margin-bottom: 10px;
 }
 
+/* Group of configuration options */
 .config-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
+/* Labels for configuration options */
 .config-group label {
     font-size: 14px;
     margin-bottom: 5px;
 }
 
+/* Input fields and dropdowns in the config panel */
 .config-group input, 
 .config-group select {
     padding: 5px;
@@ -208,6 +206,7 @@ hr {
     font-size: 14px;
 }
 
+/* Blue "Send" button */
 .send-btn {
     width: 100%;
     padding: 8px;
@@ -221,11 +220,12 @@ hr {
     margin-bottom: 5px;
 }
 
+/* Hover effect for Send button */
 .send-btn:hover {
     background-color: #657089;
 }
 
-/*Test electodes */
+/* Electrode testing section */
 .electrodes-test-container {
     display: flex;
     flex-direction: column;
@@ -233,12 +233,14 @@ hr {
     margin-top: 5px;
 }
 
+/* Section containing individual electrode tests */
 .electrode-section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Button to start electrode test */
 .test-btn {
     padding: 8px 15px;
     background-color: #727273;
@@ -251,10 +253,12 @@ hr {
     margin-bottom: 10px;
 }
 
+/* Hover effect for test button */
 .test-btn:hover {
     background-color: #b4b4b4;
 }
 
+/* Container for displaying electrodes */
 .electrode-container {
     display: flex;
     gap: 10px;
@@ -263,6 +267,7 @@ hr {
     background-color: rgba(211, 211, 211, 0.865);
 }
 
+/* Individual electrode visual indicators */
 .electrode {
     width: 20px;
     height: 20px;
@@ -271,6 +276,7 @@ hr {
     border: 1px solid black;
 }
 
+/* Container for graphs and visual representations */
 .graph-container {
     display: flex;
     flex-direction: column;

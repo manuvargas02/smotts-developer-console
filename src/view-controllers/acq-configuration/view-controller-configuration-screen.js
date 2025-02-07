@@ -2,73 +2,85 @@ class AcqConfigurationScreen {
     constructor(socket) {
         this.socket = socket;
         //UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
-    };
+        this._connect();
+        this._disconnect();
+        this._hubStatus();
+        this._bciStatus();
+        this._wristbandStatus();
+        this._start();
+        this._setBciConfiguration();
+        this._getBciConfiguration();
+        this._setWristbandConfiguration();
+        this._getWristbandConfiguration();
+        this._testBciElectrodes();
+        this._testWristbandElectrodes();
+    }
 
-    connect() {
+    _connect() {
         this.socket.on("connect", () => {
-            console.log("Connecting to server...");
+            console.log("Connected to server");
             UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#0F0";
         });
-    };
+    }
     
-    disconnect() {
+    _disconnect() {
         this.socket.on("disconnect", () => {
-            console.log("Disconnecting from the server...");
+            console.log("Disconnected from the server");
             UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
         });
-    };
+    }
 
-    hubStatus() {
+    _hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
             console.log("Hub status:", parsedData.status);
             DeviceStatus.getHubStatus(UIAcqConfiguration, parsedData.status);
         });
-    };
+    }
 
-    bciStatus() {
+    _bciStatus() {
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
             console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
         });
-    };
+    }
 
-    wristbandStatus() {
+    _wristbandStatus() {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
             console.log("Wristband status:", parsedData.status);
             DeviceStatus.getWristbandStatus(UIAcqConfiguration, parsedData.status);
         });
-    };
+    }
 
-    start() {
+    _start() {
         UIAcqConfiguration.btnStart.addEventListener("click", () => {
             this.socket.emit("START", '{"start": true}');
             this.socket.on("START", (data) => {
                 const parsedResponse = JSON.parse(data);
                 if (parsedResponse.success) {
-                    console.log(" Data Adquisition started successfully!");
+                    console.log("Data Acquisition started successfully!");
                 } else {
-                    console.log(" Failed to start Data Adquisition");
+                    console.log("Failed to start Data Acquisition");
                 }
             });
         });
-    };
+    }
 
-    setBciConfiguration() {
+    _setBciConfiguration() {
         UIAcqConfiguration.btnSendBciConfig.addEventListener("click", () => {
             console.log("Setting BCI configuration...");
             const config = ConfigPanel.setConfig("bci");
             console.log(config);
             this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify(config));
         });
-    };
+    }
 
-    getBciConfiguration() {
+    _getBciConfiguration() {
         UIAcqConfiguration.btnGetBciConfig.addEventListener("click", () => {
             console.log("Getting BCI configuration...");
-            this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify({ operation: "get_config"}));
+            this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify({ operation: "get_config" }));
         });
         this.socket.on("BCI_ACQ_CONFIG", (response) => {
             const parsedResponse = JSON.parse(response);
@@ -84,21 +96,21 @@ class AcqConfigurationScreen {
                 }
             }
         });
-    };
+    }
 
-    setWristbandConfiguration() {
+    _setWristbandConfiguration() {
         UIAcqConfiguration.btnSendWristbandConfig.addEventListener("click", () => {
             console.log("Setting Wristband configuration...");
             const config = ConfigPanel.setConfig("wristband");
             console.log(config);
             this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify(config));
         });
-    };
+    }
 
-    getWristbandConfiguration() {
+    _getWristbandConfiguration() {
         UIAcqConfiguration.btnGetWristbandConfig.addEventListener("click", () => {
             console.log("Getting Wristband configuration...");
-            this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify({ operation: "get_config"}));
+            this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify({ operation: "get_config" }));
         });
         this.socket.on("WRISTBAND_ACQ_CONFIG", (response) => {
             const parsedResponse = JSON.parse(response);
@@ -114,9 +126,9 @@ class AcqConfigurationScreen {
                 }
             }
         });
-    };
+    }
 
-    testBciElectrodes() {
+    _testBciElectrodes() {
         UIAcqConfiguration.btnTestBci.addEventListener("click", () => {
             console.log("Testing BCI electrodes...");
             this.socket.emit("TEST_BCI_ELECTRODES", '{"test": true}');
@@ -130,9 +142,9 @@ class AcqConfigurationScreen {
                 console.log("Failed to test BCI electrodes.");
             }
         });
-    };
+    }
 
-    testWristbandElectrodes() {
+    _testWristbandElectrodes() {
         UIAcqConfiguration.btnTestWristband.addEventListener("click", () => {
             console.log("Testing Wristband electrodes...");
             this.socket.emit("TEST_WRISTBAND_ELECTRODES", '{"test": true}');
@@ -146,5 +158,5 @@ class AcqConfigurationScreen {
                 console.log("Failed to test Wristband electrodes.");
             }
         });
-    };
-};
+    }
+}

@@ -55,9 +55,11 @@
                     </div>
                     <div class = "graph-container">
                             <button id="btn-clear">CLEAR GRAPHS</button>
-                            <canvas id="myChart"></canvas>
+                            <canvas id="graph-1"></canvas>
                     </div>
                 </div>
+                <div id = "console"></div>
+                <div style="height: 300px;"></div>
             </div>
 
 
@@ -212,14 +214,15 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="src/lib/socket_io.min.js"></script>
         <script src="src/constants.js"></script>
-        <script src="src/resources/devices-status.js"></script>
-        <script src="src/resources/param-conf-pannels.js"></script>
+        <script src="src/components/devices-status.js"></script>
+        <script src="src/components/console-controller.js"></script>
+        <script src="src/components/electrodes-graph.js"></script>
+        <script src="src/components/parameters-configuration-pannels.js"></script>
         <script src="src/websocket_manager.js"></script>
-        <script src="src/acq-configuration/acq-configuration.js"></script>
-        <script src="src/acq-configuration/UIElements.js"></script>
-        <script src="src/acq-status/acq-status.js"></script>
-        <script src="src/acq-status/UIElements.js"></script>
-        <script src="src/resources/electrodes-graph.js"></script>
+        <script src="src/view-controllers/acq-configuration/ui-elements-configuration-screen.js"></script>
+        <script src="src/view-controllers/acq-configuration/view-controller-configuration-screen.js"></script>
+        <script src="src/view-controllers/acq-status/ui-elements-status-screen.js"></script>
+        <script src="src/view-controllers/acq-status/view-controller-status-screen.js"></script>
         <script src="src/app.js"></script>
         
     </body>

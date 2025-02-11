@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMOTSS DEVELOPER CONSOLE</title>
+    <link rel="stylesheet" href="style/style.css">    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SMOTSS Administration Console</h1>
+            <button class="status-bci">BCI Online</button>
+            <button class="status-emg">EMG Offline</button>
+        </header>
+        <div class="config-panel">
+            <h2>Configuration Parameters</h2>
+            <label for="frequency">Frequency:</label>
+            <select id="frequency">
+                <option value="20000">20000</option>
+                <option value="10000">10000</option>
+            </select>
+            <h3>Input Type:</h3>
+            <div class="input-toggle">
+                <label>Fp1</label>
+                <input type="checkbox">
+                <label>Fp2</label>
+                <input type="checkbox">
+                <label>AF7/F7</label>
+                <input type="checkbox">
+                <label>AF8/F8</label>
+                <input type="checkbox">
+                <label>F9</label>
+                <input type="checkbox">
+                <label>F10</label>
+                <input type="checkbox">
+                <label>FPz</label>
+                <input type="checkbox">
+                <label>AFz</label>
+                <input type="checkbox">         
+            </div>
+            <div class="sensor-panel">
+                <div class="sensor-grid">
+                  <div class="sensor active">Fp1</div>
+                  <div class="sensor active">Fp2</div>
+                  <div class="sensor active">AF7/F7</div>
+                  <div class="sensor active">AF8/F8</div>
+                  <div class="sensor active">F9</div>
+                  <div class="sensor active">F10</div>
+                  <div class="sensor active">FPz</div>
+                  <div class="sensor active">AFz</div>
+                </div>
+                <button class="test-sensors">TEST SENSORS</button>
+            </div>
+            <button class="start-study">START STUDY</button>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="src/lib/socket_io.min.js"></script>
+        <script src="src/constants.js"></script>
+        <script src="src/components/devices-status.js"></script>
+        <script src="src/components/console-controller.js"></script>
+        <script src="src/components/electrodes-graph.js"></script>
+        <script src="src/components/parameters-configuration-pannels.js"></script>
+        <script src="src/websocket_manager.js"></script>
+        <script src="src/view-controllers/acq-configuration/ui-elements-configuration-screen.js"></script>
+        <script src="src/view-controllers/acq-configuration/view-controller-configuration-screen.js"></script>
+        <script src="src/view-controllers/acq-status/ui-elements-status-screen.js"></script>
+        <script src="src/view-controllers/acq-status/view-controller-status-screen.js"></script>
+        <script src="src/app.js"></script>
+        
+    </body>
+</html>

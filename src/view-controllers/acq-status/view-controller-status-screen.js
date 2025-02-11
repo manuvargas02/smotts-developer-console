@@ -13,6 +13,24 @@ class AcqStatusScreen {
         this._sendConsoleMessage();
     }
 
+    destructor() {
+        this.socket.off("connect");
+        this.socket.off("disconnect");
+        this.socket.off("STATUS_HUB");
+        this.socket.off("STATUS_BCI");
+        this.socket.off("STATUS_WRISTBAND");
+        this.socket.off("STOP");
+        this.socket.off("STUDY_DATA");
+        this.socket.off("EEG_DATA");
+        this.socket.off("LOG_CONSOLE");
+
+        UIAcqStatus.btnStop.removeEventListener("click", this._stopListener);
+        UIAcqStatus.btnClear.removeEventListener("click", this._clearListener);
+
+        this.socket = null;
+
+    }
+
     _connect() {
         this.socket.on("connect", () => {
             console.log("Connected to server");
@@ -49,7 +67,7 @@ class AcqStatusScreen {
     }
 
     _stop() {
-        UIAcqStatus.btnStop.addEventListener("click", () => {
+        this._stopListener = () => {
             this.socket.emit("STOP", '{"stop": true}');
             this.socket.on("STOP", (data) => {
                 const parsedResponse = JSON.parse(data);
@@ -59,7 +77,8 @@ class AcqStatusScreen {
                     console.log("Failed to stop Data Acquisition");
                 }
             });
-        });
+        };
+        UIAcqStatus.btnStop.addEventListener("click", this._stopListener);
     }
 
     _getStudyData() {
@@ -80,10 +99,11 @@ class AcqStatusScreen {
     }
 
     _clearGraph(graph) {
-        UIAcqStatus.btnClear.addEventListener("click", () => {
+        this._clearGraphListener = () => {
             graph.clear();
             console.log("Graph cleared!");
-        });
+        };
+        UIAcqStatus.btnClear.addEventListener("click", this._clearGraphListener);
     }
 
     _sendConsoleMessage() {

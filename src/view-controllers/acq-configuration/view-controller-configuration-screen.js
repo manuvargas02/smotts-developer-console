@@ -1,7 +1,7 @@
 class AcqConfigurationScreen {
     constructor(socket) {
         this.socket = socket;
-        //UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
+        // UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
         this._connect();
         this._disconnect();
         this._hubStatus();
@@ -16,13 +16,36 @@ class AcqConfigurationScreen {
         this._testWristbandElectrodes();
     }
 
+    destructor() {
+        this.socket.off("connect");
+        this.socket.off("disconnect");
+        this.socket.off("STATUS_HUB");
+        this.socket.off("STATUS_BCI");
+        this.socket.off("STATUS_WRISTBAND");
+        this.socket.off("START");
+        this.socket.off("BCI_ACQ_CONFIG");
+        this.socket.off("WRISTBAND_ACQ_CONFIG");
+        this.socket.off("BCI_ELECTRODES_STATUS");
+        this.socket.off("WRISTBAND_ELECTRODES_STATUS");
+
+        UIAcqConfiguration.btnStart.removeEventListener("click", this._startListener);
+        UIAcqConfiguration.btnSendBciConfig.removeEventListener("click", this._setBciConfigListener);
+        UIAcqConfiguration.btnGetBciConfig.removeEventListener("click", this._getBciConfigListener);
+        UIAcqConfiguration.btnSendWristbandConfig.removeEventListener("click", this._setWristbandConfigListener);
+        UIAcqConfiguration.btnGetWristbandConfig.removeEventListener("click", this._getWristbandConfigListener);
+        UIAcqConfiguration.btnTestBci.removeEventListener("click", this._testBciElectrodesListener);
+        UIAcqConfiguration.btnTestWristband.removeEventListener("click", this._testWristbandElectrodesListener);
+
+        this.socket = null;
+    }
+
     _connect() {
         this.socket.on("connect", () => {
             console.log("Connected to server");
             UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#0F0";
         });
     }
-    
+
     _disconnect() {
         this.socket.on("disconnect", () => {
             console.log("Disconnected from the server");
@@ -55,84 +78,79 @@ class AcqConfigurationScreen {
     }
 
     _start() {
-        UIAcqConfiguration.btnStart.addEventListener("click", () => {
+        this._startListener = () => {
             this.socket.emit("START", '{"start": true}');
             this.socket.on("START", (data) => {
                 const parsedResponse = JSON.parse(data);
-                if (parsedResponse.success) {
-                    console.log("Data Acquisition started successfully!");
-                } else {
-                    console.log("Failed to start Data Acquisition");
-                }
+                console.log(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
             });
-        });
+        };
+        UIAcqConfiguration.btnStart.addEventListener("click", this._startListener);
     }
 
     _setBciConfiguration() {
-        UIAcqConfiguration.btnSendBciConfig.addEventListener("click", () => {
+        this._setBciConfigListener = () => {
             console.log("Setting BCI configuration...");
             const config = ConfigPanel.setConfig("bci");
             console.log(config);
             this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify(config));
-        });
+        };
+        UIAcqConfiguration.btnSendBciConfig.addEventListener("click", this._setBciConfigListener);
     }
 
     _getBciConfiguration() {
-        UIAcqConfiguration.btnGetBciConfig.addEventListener("click", () => {
+        this._getBciConfigListener = () => {
             console.log("Getting BCI configuration...");
             this.socket.emit("BCI_ACQ_CONFIG", JSON.stringify({ operation: "get_config" }));
-        });
+        };
+        UIAcqConfiguration.btnGetBciConfig.addEventListener("click", this._getBciConfigListener);
+
         this.socket.on("BCI_ACQ_CONFIG", (response) => {
             const parsedResponse = JSON.parse(response);
-            console.log(parsedResponse);    
+            console.log(parsedResponse);
             if (parsedResponse.operation === "get_config") {
                 ConfigPanel.getConfig("bci", parsedResponse.data);
-            } 
-            else if (parsedResponse.operation === "set_config") {
-                if (parsedResponse.success) {
-                    console.log("BCI Configuration set successfully!");
-                } else {
-                    console.log("Failed to set BCI Configuration.");
-                }
+            } else if (parsedResponse.operation === "set_config") {
+                console.log(parsedResponse.success ? "BCI Configuration set successfully!" : "Failed to set BCI Configuration.");
             }
         });
     }
 
     _setWristbandConfiguration() {
-        UIAcqConfiguration.btnSendWristbandConfig.addEventListener("click", () => {
+        this._setWristbandConfigListener = () => {
             console.log("Setting Wristband configuration...");
             const config = ConfigPanel.setConfig("wristband");
             console.log(config);
             this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify(config));
-        });
+        };
+        UIAcqConfiguration.btnSendWristbandConfig.addEventListener("click", this._setWristbandConfigListener);
     }
 
     _getWristbandConfiguration() {
-        UIAcqConfiguration.btnGetWristbandConfig.addEventListener("click", () => {
+        this._getWristbandConfigListener = () => {
             console.log("Getting Wristband configuration...");
             this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify({ operation: "get_config" }));
-        });
+        };
+        UIAcqConfiguration.btnGetWristbandConfig.addEventListener("click", this._getWristbandConfigListener);
+
         this.socket.on("WRISTBAND_ACQ_CONFIG", (response) => {
             const parsedResponse = JSON.parse(response);
-            console.log(parsedResponse);    
+            console.log(parsedResponse);
             if (parsedResponse.operation === "get_config") {
                 ConfigPanel.getConfig("wristband", parsedResponse.data);
-            } 
-            else if (parsedResponse.operation === "set_config") {
-                if (parsedResponse.success) {
-                    console.log("Wristband Configuration set successfully!");
-                } else {
-                    console.log("Failed to set Wristband Configuration.");
-                }
+            } else if (parsedResponse.operation === "set_config") {
+                console.log(parsedResponse.success ? "Wristband Configuration set successfully!" : "Failed to set Wristband Configuration.");
             }
         });
     }
 
     _testBciElectrodes() {
-        UIAcqConfiguration.btnTestBci.addEventListener("click", () => {
+        this._testBciElectrodesListener = () => {
             console.log("Testing BCI electrodes...");
             this.socket.emit("TEST_BCI_ELECTRODES", '{"test": true}');
-        });
+        };
+        UIAcqConfiguration.btnTestBci.addEventListener("click", this._testBciElectrodesListener);
+
         this.socket.on("BCI_ELECTRODES_STATUS", (data) => {
             const parsedResponse = JSON.parse(data);
             if (parsedResponse.status_ok) {
@@ -145,10 +163,12 @@ class AcqConfigurationScreen {
     }
 
     _testWristbandElectrodes() {
-        UIAcqConfiguration.btnTestWristband.addEventListener("click", () => {
+        this._testWristbandElectrodesListener = () => {
             console.log("Testing Wristband electrodes...");
             this.socket.emit("TEST_WRISTBAND_ELECTRODES", '{"test": true}');
-        });
+        };
+        UIAcqConfiguration.btnTestWristband.addEventListener("click", this._testWristbandElectrodesListener);
+
         this.socket.on("WRISTBAND_ELECTRODES_STATUS", (data) => {
             const parsedResponse = JSON.parse(data);
             if (parsedResponse.status_ok) {

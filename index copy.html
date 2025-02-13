@@ -4,56 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMOTSS DEVELOPER CONSOLE</title>
-    <link rel="stylesheet" href="style/style.css">    
+    <link rel="stylesheet" href="style/style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+   
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>SMOTSS Administration Console</h1>
-            <button class="status-bci">BCI Online</button>
-            <button class="status-emg">EMG Offline</button>
-        </header>
-        <div class="config-panel">
-            <h2>Configuration Parameters</h2>
-            <label for="frequency">Frequency:</label>
-            <select id="frequency">
-                <option value="20000">20000</option>
-                <option value="10000">10000</option>
-            </select>
-            <h3>Input Type:</h3>
-            <div class="input-toggle">
-                <label>Fp1</label>
-                <input type="checkbox">
-                <label>Fp2</label>
-                <input type="checkbox">
-                <label>AF7/F7</label>
-                <input type="checkbox">
-                <label>AF8/F8</label>
-                <input type="checkbox">
-                <label>F9</label>
-                <input type="checkbox">
-                <label>F10</label>
-                <input type="checkbox">
-                <label>FPz</label>
-                <input type="checkbox">
-                <label>AFz</label>
-                <input type="checkbox">         
+        <!-- CONFIGURATION SCREEN -->
+        <div class="header">
+            <div class="logo">
+                <img src="src/components/smotts-logo.png" />
             </div>
-            <div class="sensor-panel">
-                <div class="sensor-grid">
-                  <div class="sensor active">Fp1</div>
-                  <div class="sensor active">Fp2</div>
-                  <div class="sensor active">AF7/F7</div>
-                  <div class="sensor active">AF8/F8</div>
-                  <div class="sensor active">F9</div>
-                  <div class="sensor active">F10</div>
-                  <div class="sensor active">FPz</div>
-                  <div class="sensor active">AFz</div>
-                </div>
-                <button class="test-sensors">TEST SENSORS</button>
-            </div>
-            <button class="start-study">START STUDY</button>
+            <div class="title-container">SMOTTS Administration Console</div>
         </div>
+        <div class="hub-bci-emg-container">
+            <div class="status-hub">READY TO CONNECT</div>
+            <div class="status-container">
+                <div class="status-item">
+                    <div id="bci-indicator-1" class="status-indicator"></div>
+                    BCI Online
+                </div>
+                <div class="status-item">
+                    <span class="status-indicator "></span>
+                    EMG Offline
+                </div>
+            </div>
+        </div>
+        <div class="configuration-parameters-container">
+            <h2 class="config-title">Configuration Parameters</h2>
+        
+            <!-- Frequency Selection -->
+            <div class="config-row">
+                <label for="frequency">Frequency:</label>
+                <select id="frequency">
+                    <option value="20000">20000</option>
+                    <option value="10000">10000</option>
+                    <option value="5000">5000</option>
+                </select>
+            </div>
+        
+            <!-- Gain Selection -->
+            <div class="config-row">
+                <label for="gain">Gain:</label>
+                <select id="gain">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+        
+            <!-- Input Type Selection -->
+            <div class="config-row">
+                <label for="input-type">Input Type:</label>
+                <select id="input-type">
+                    <option value="test1">Test1</option>
+                    <option value="test2">Test2</option>
+                </select>
+            </div>
+
+        
+            <!-- Electrodes selection -->
+            <div class="electrode-switch-container">
+                <div class="electrode-grid">
+                    <div class="electrode-item">
+                        <span class="electrode-label">Fp1</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AF7/F7</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">Fp2</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AF8/F8</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+            
+                    <div class="electrode-item">
+                        <span class="electrode-label">F9</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">F10</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">FPz</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AFz</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="config-buttons">
+                <button class="btn-config">Get Config</button>
+                <button class="btn-config">Set Config</button>
+            </div>
+      
+        <div class="electrode-status-panel">
+            <div class="electrode-state-grid">
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator yellow"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator green"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">Fp1</span>
+                    <div class="electrode-state-indicator red"></div>
+                </div>
+                <!-- Botón TEST SENSORS -->
+                <div class="test-sensors-button">
+                    TEST <br> SENSORS
+                </div>
+            </div>
+            <button class="start-study-button">START STUDY</button>
+        </div>
+        <div id = "console"></div>
+    </div>
+    </div>
+</div>
+
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

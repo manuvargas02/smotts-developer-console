@@ -14,6 +14,7 @@ class AcqConfigurationScreen {
         this._getWristbandConfiguration();
         this._testBciElectrodes();
         this._testWristbandElectrodes();
+        this._sendConsoleMessage();
     }
 
     destructor() {
@@ -176,6 +177,30 @@ class AcqConfigurationScreen {
                 ConfigPanel.testElectrodes("Wristband", parsedResponse.electrodes_status);
             } else {
                 console.log("Failed to test Wristband electrodes.");
+            }
+        });
+    }
+
+    _sendConsoleMessage() {
+        const console = new ConsoleController("console", "CONSOLE", 800, 200, 300);
+        this.socket.on("LOG_CONSOLE", (data) => {
+            try {
+                const parsedData = JSON.parse(data);
+    
+                if (parsedData["operation"] === "info") {
+                    console.addInfo(parsedData["data"]);
+                } 
+                else if (parsedData["operation"] === "warning") {
+                    console.addWarning(parsedData["data"]);
+                } 
+                else if (parsedData["operation"] === "error") {
+                    console.addError(parsedData["data"]);
+                } 
+                else {
+                    console.addSuccess(parsedData["data"]);
+                }
+            } catch (error) {
+                console.addError(`Error receiving console data: ${error.message}`);
             }
         });
     }

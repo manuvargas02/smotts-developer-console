@@ -136,7 +136,7 @@ select {
 
 select:focus {
     outline: none;
-    border: 2px solid #4D8B31;
+    border: 2px solid #647485;
 }
 
 .config-buttons {
@@ -158,7 +158,7 @@ select:focus {
 }
 
 .btn-config:hover {
-    background-color: #4D8B31;
+    background-color: #777777;
     color: white;
 }
 
@@ -274,7 +274,7 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #004A80;
+    background-color: #0062AF;
     padding: 10px;
     border-radius: 5px;
     width: 140px;
@@ -296,18 +296,20 @@ input:checked + .slider:before {
 
 /* Colores de los electrodos */
 .green { background-color: #4D8B31; }
-.yellow { background-color: #FFD700; }
-.red { background-color: #FF0033; }
+.yellow { background-color: #D0B933; }
+.red { background-color: #FF0035; }
 
 /* Botón TEST SENSORS */
 .test-sensors-button {
     display: flex;
     align-items: center;
+    width: 140px;
+    height: 164px;
     justify-content: center;
     background-color: #4D8B31;
     color: white;
     font-weight: bold;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     font-family: 'Lato', sans-serif;
     font-size: 32px;

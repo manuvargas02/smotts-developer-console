@@ -5,8 +5,14 @@ class DeviceStatus {
      * @param {string} indicatorKey - The key of the device's indicator to update.
      * @param {string} status - The status of the device ("connected" or "disconnected").
      */
-    static updateIndicator(screen, indicatorKey, status) {
-        screen[indicatorKey].style.backgroundColor = status === "connected" ? "#0F0" : "#F00";
+    static updateIndicator(screen, indicatorCircleKey, indicatorTextKey, status) {
+        screen[indicatorCircleKey].style.backgroundColor = status === "connected" ? "#0F0" : "#F00";
+        if (indicatorTextKey === "bciTextStatus") {
+            screen[indicatorTextKey].innerHTML = status === "connected" ? "BCI Online" : "BCI Offline";
+        }
+            else if (indicatorTextKey === "emgTextStatus") {
+            screen[indicatorTextKey].innerHTML = status === "connected" ? "EMG Online" : "EMG Offline";
+        }
     }
 
     /**
@@ -14,9 +20,6 @@ class DeviceStatus {
      * @param {Object} screen - The screen object containing status indicator.
      * @param {string} status - The connection status ("connected" or "disconnected").
      */
-    static getHubStatus(screen, status) {
-        this.updateIndicator(screen, "hubIndicator", status);
-    }
 
     /**
      * Updates the BCI connection status indicator.
@@ -24,7 +27,7 @@ class DeviceStatus {
      * @param {string} status - The connection status ("connected" or "disconnected").
      */
     static getBciStatus(screen, status) {
-        this.updateIndicator(screen, "bciIndicator", status);
+        this.updateIndicator(screen, "bciCircleStatus", "bciTextStatus", status);
     }
 
     /**
@@ -32,8 +35,8 @@ class DeviceStatus {
      * @param {Object} screen - The screen object containing status indicator.
      * @param {string} status - The connection status ("connected" or "disconnected").
      */
-    static getWristbandStatus(screen, status) {
-        this.updateIndicator(screen, "wristIndicator", status);
+    static getEmgStatus(screen, status) {
+        this.updateIndicator(screen, "emgCircleStatus", "emgTextStatus", status);
     }
 
     /**

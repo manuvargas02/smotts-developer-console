@@ -29,8 +29,7 @@ class ConfigPanel {
     static getConfig(devicePanel, config) {
         UIAcqConfiguration[`${devicePanel}ConfigButtons`].freq.value = config.freq;
         UIAcqConfiguration[`${devicePanel}ConfigButtons`].gain.value = config.gain;
-        UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value = config.inputType;
-        UIAcqConfiguration[`${devicePanel}ConfigButtons`].channel.value = config.channels;
+        UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value = config.input_type;
     }
 
     /**

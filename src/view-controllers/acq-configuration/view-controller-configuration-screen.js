@@ -4,16 +4,13 @@ class AcqConfigurationScreen {
         // UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
         this._connect();
         this._disconnect();
-        this._hubStatus();
+        //this._hubStatus();
         this._bciStatus();
-        this._wristbandStatus();
+        this._emgStatus();
         this._start();
         this._setBciConfiguration();
         this._getBciConfiguration();
-        this._setWristbandConfiguration();
-        this._getWristbandConfiguration();
         this._testBciElectrodes();
-        this._testWristbandElectrodes();
         this._sendConsoleMessage();
     }
 
@@ -70,11 +67,11 @@ class AcqConfigurationScreen {
         });
     }
 
-    _wristbandStatus() {
+    _emgStatus() {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
             console.log("Wristband status:", parsedData.status);
-            DeviceStatus.getWristbandStatus(UIAcqConfiguration, parsedData.status);
+            DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
@@ -181,8 +178,8 @@ class AcqConfigurationScreen {
         });
     }
 
-    _sendConsoleMessage() {
-        const console = new ConsoleController("console", "CONSOLE", 800, 200, 300);
+    _sendConsoleMessage() {    
+        const console = new ConsoleController("console", "Console Output", 1685, 219, 300, "20px");
         this.socket.on("LOG_CONSOLE", (data) => {
             try {
                 const parsedData = JSON.parse(data);

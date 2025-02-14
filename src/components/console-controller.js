@@ -13,7 +13,7 @@ class ConsoleController {
      * @param {string} [bgTitleColor="#00008B"] - Background color of the title bar.
      * @param {string} [titleColor="#FFFFFF"] - Text color of the title.
      */
-    constructor(htmlElement, title, width, height, maxHistory = 100, bgColor = "#202020", bgTitleColor = "#00008B", titleColor = "#FFFFFF") {
+    constructor(htmlElement, title, width, height, maxHistory = 100, marginLeft="0px", bgColor = "#D9D9D9", bgTitleColor = "#021D32", titleColor = "#FFFFFF") {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -22,6 +22,7 @@ class ConsoleController {
         this.titleColor = titleColor;
         this.maxHistory = maxHistory;
         this.htmlElement = htmlElement;
+        this.marginLeft = marginLeft;
 
         this._createConsoleElement();
     }
@@ -46,13 +47,16 @@ class ConsoleController {
         this.consoleElement.style.border = "2px solid #333";
         this.consoleElement.style.borderRadius = "8px";
         this.consoleElement.style.overflow = "hidden";
+        this.consoleElement.style.marginLeft = this.marginLeft;
 
         // Create title element for console
         this.titleElement = document.createElement("div");
+        this.titleElement.style.fontFamily = "'Lato', sans-serif";
+        this.titleElement.style.fontSize = "20px"; 
         this.titleElement.innerText = this.title;
         this.titleElement.style.backgroundColor = this.bgTitleColor;
         this.titleElement.style.color = this.titleColor;
-        this.titleElement.style.padding = "4px";
+        this.titleElement.style.padding = "8px";
         this.titleElement.style.textAlign = "left"; 
         this.titleElement.style.paddingLeft = "10px";
 
@@ -82,6 +86,10 @@ class ConsoleController {
         const messageElement = document.createElement("div");
         messageElement.style.padding = "4px";
 
+        // Set font family and size of messages
+        messageElement.style.fontFamily = "'Lato', sans-serif"; // Fuente Lato
+        messageElement.style.fontSize = "20px"; // Tamaño de fuente 20px
+
         // Format message with ">" in white and the text in the given color
         messageElement.textContent = `> ${message}`;
         messageElement.style.color = color;
@@ -103,7 +111,7 @@ class ConsoleController {
      * @param {string} message - The message text.
      */
     addInfo(message) {
-        this._addMessage(message, "#FFFFFF");
+        this._addMessage(message, "#000000");
     }
 
     /**
@@ -111,7 +119,7 @@ class ConsoleController {
      * @param {string} message - The message text.
      */
     addWarning(message) {
-        this._addMessage(message, "#FFFF00");
+        this._addMessage(message, "#D0B933");
     }
 
     /**
@@ -119,7 +127,7 @@ class ConsoleController {
      * @param {string} message - The message text.
      */
     addError(message) {
-        this._addMessage(message, "#FF0000");
+        this._addMessage(message, "#FF0035");
     }
 
     /**
@@ -127,6 +135,6 @@ class ConsoleController {
      * @param {string} message - The message text.
      */
     addSuccess(message) {
-        this._addMessage(message, "#00FF00");
+        this._addMessage(message, "#4D8B31");
     }
 }

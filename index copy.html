@@ -18,15 +18,15 @@
             <div class="title-container">SMOTTS Administration Console</div>
         </div>
         <div class="hub-bci-emg-container">
-            <div class="status-hub">READY TO CONNECT</div>
+            <div id="hub-status-2" class="status-hub">READY TO CONNECT</div>
             <div class="status-container">
                 <div class="status-item">
-                    <div id="bci-indicator-1" class="status-indicator"></div>
-                    BCI Online
+                    <div id="bci-circle-status-2" class="status-indicator"></div>
+                    <span id="bci-text-status-2">BCI Online</span>
                 </div>
                 <div class="status-item">
-                    <span class="status-indicator "></span>
-                    EMG Offline
+                    <div id="emg-circle-status-2" class="status-indicator "></div>
+                    <span id="emg-text-status-2">EMG Offline</span>
                 </div>
             </div>
         </div>
@@ -35,9 +35,9 @@
         
             <!-- Frequency Selection -->
             <div class="config-row">
-                <label for="frequency">Frequency:</label>
-                <select id="frequency">
-                    <option value="20000">20000</option>
+                <label for="freq-bci">Frequency:</label>
+                <select id="freq-bci">
+                    <option value="1000">1000</option>
                     <option value="10000">10000</option>
                     <option value="5000">5000</option>
                 </select>
@@ -45,8 +45,8 @@
         
             <!-- Gain Selection -->
             <div class="config-row">
-                <label for="gain">Gain:</label>
-                <select id="gain">
+                <label for="gain-bci">Gain:</label>
+                <select id="gain-bci">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -55,9 +55,9 @@
         
             <!-- Input Type Selection -->
             <div class="config-row">
-                <label for="input-type">Input Type:</label>
-                <select id="input-type">
-                    <option value="test1">Test1</option>
+                <label for="input-type-bci">Input Type:</label>
+                <select id="input-type-bci">
+                    <option value="test">Test</option>
                     <option value="test2">Test2</option>
                 </select>
             </div>
@@ -74,14 +74,14 @@
                         </label>
                     </div>
                     <div class="electrode-item">
-                        <span class="electrode-label">AF7/F7</span>
+                        <span class="electrode-label">Fp2</span>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="electrode-item">
-                        <span class="electrode-label">Fp2</span>
+                        <span class="electrode-label">AF7/F7</span>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider"></span>
@@ -127,54 +127,54 @@
             </div>
             <!-- Buttons -->
             <div class="config-buttons">
-                <button class="btn-config">Get Config</button>
-                <button class="btn-config">Set Config</button>
+                <button id="get-btn-bci" class="btn-config">Get Config</button>
+                <button id="send-btn-bci" class="btn-config">Set Config</button>
             </div>
       
         <div class="electrode-status-panel">
             <div class="electrode-state-grid">
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-1" class="electrode-state-indicator green"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <span class="electrode-state-label">Fp2</span>
+                    <div id="bci-electrode-2" class="electrode-state-indicator green"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <span class="electrode-state-label">AF7/F7</span>
+                    <div id="bci-electrode-3" class="electrode-state-indicator green"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <span class="electrode-state-label">AF8/F8</span>
+                    <div id="bci-electrode-4" class="electrode-state-indicator green"></div>
                 </div>
 
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <span class="electrode-state-label">F9</span>
+                    <div id="bci-electrode-5" class="electrode-state-indicator green"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator yellow"></div>
+                    <span class="electrode-state-label">F10</span>
+                    <div id="bci-electrode-6" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator green"></div>
+                    <span class="electrode-state-label">FPz</span>
+                    <div id="bci-electrode-7" class="electrode-state-indicator green"></div>
                 </div>
                 <div class="electrode-state-item">
-                    <span class="electrode-state-label">Fp1</span>
-                    <div class="electrode-state-indicator red"></div>
+                    <span class="electrode-state-label">AFz</span>
+                    <div id="bci-electrode-8" class="electrode-state-indicator red"></div>
                 </div>
-                <!-- Botón TEST SENSORS -->
-                <div class="test-sensors-button">
+                <!-- TEST SENSORS -->
+                <div id="test-electrodes-bci" class="test-sensors-button">
                     TEST <br> SENSORS
                 </div>
             </div>
-            <button class="start-study-button">START STUDY</button>
+            <button id="start-study-btn" class="start-study-button">START STUDY</button>
         </div>
-        <div id = "console"></div>
     </div>
+    <div id = "console"></div>
     </div>
 </div>
 

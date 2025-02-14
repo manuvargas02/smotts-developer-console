@@ -1,18 +1,11 @@
 class UIAcqConfiguration {
     static get btnStart() {
         if (!UIAcqConfiguration._btnStart) {
-            UIAcqConfiguration._btnStart = document.getElementById("btn-start");
+            UIAcqConfiguration._btnStart = document.getElementById("start-study-btn");
         }
         return UIAcqConfiguration._btnStart;
     }
    
-    static get connectionIndicator() {
-        if (!UIAcqConfiguration._connectionIndicator) {
-            UIAcqConfiguration._connectionIndicator = document.getElementById("connection-indicator-2");
-        }
-        return UIAcqConfiguration._connectionIndicator;
-    }
-
     static get hubIndicator() {
         if (!UIAcqConfiguration._hubIndicator) {
             UIAcqConfiguration._hubIndicator = document.getElementById("hub-status-2");
@@ -20,19 +13,33 @@ class UIAcqConfiguration {
         return UIAcqConfiguration._hubIndicator;
     }
 
-    static get bciIndicator() {
-        if (!UIAcqConfiguration._bciIndicator) {
-            UIAcqConfiguration._bciIndicator = document.getElementById("bci-status-2");
+    static get bciCircleStatus() {
+        if (!UIAcqConfiguration._bciCircleStatus) {
+            UIAcqConfiguration._bciCircleStatus = document.getElementById("bci-circle-status-2");
         }
-        return UIAcqConfiguration._bciIndicator;
+        return UIAcqConfiguration._bciCircleStatus;
     }
 
-    static get wristIndicator() {
-        if (!UIAcqConfiguration._wristIndicator) {
-            UIAcqConfiguration._wristIndicator = document.getElementById("wristband-status-2");
+    static get bciTextStatus() {
+        if (!UIAcqConfiguration._bciTextStatus) {
+            UIAcqConfiguration._bciTextStatus = document.getElementById("bci-text-status-2");
         }
-        return UIAcqConfiguration._wristIndicator;
+        return UIAcqConfiguration._bciTextStatus;
     }
+
+    static get emgCircleStatus() {
+        if (!UIAcqConfiguration._emgCircleStatus) {
+            UIAcqConfiguration._emgCircleStatus = document.getElementById("emg-circle-status-2");
+        }
+        return UIAcqConfiguration._emgCircleStatus;
+    }
+
+    static get emgTextStatus() {
+        if (!UIAcqConfiguration._emgTextStatus) {
+            UIAcqConfiguration._emgTextStatus = document.getElementById("emg-text-status-2");
+        }
+        return UIAcqConfiguration._emgTextStatus;
+    }   
 
     static get bciConfigButtons() {
         if (!UIAcqConfiguration._bciConfigButtons) {
@@ -40,7 +47,6 @@ class UIAcqConfiguration {
                 freq: document.getElementById("freq-bci"),
                 gain: document.getElementById("gain-bci"),
                 inputType: document.getElementById("input-type-bci"),
-                channel: document.getElementById("channels-bci")
             };
         }
         return UIAcqConfiguration._bciConfigButtons;
@@ -88,7 +94,7 @@ class UIAcqConfiguration {
 
     static get btnTestBci() {
         if (!UIAcqConfiguration._btnTestBci) {
-            UIAcqConfiguration._btnTestBci = document.getElementById("test-btn-bci");
+            UIAcqConfiguration._btnTestBci = document.getElementById("test-electrodes-bci");
         }
         return UIAcqConfiguration._btnTestBci;
     }

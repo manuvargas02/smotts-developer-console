@@ -12,7 +12,6 @@ class ConfigPanel {
             freq: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].freq.value, 10),
             gain: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].gain.value, 10),
             inputType: UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value,
-            channels: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].channel.value, 16),
         };
 
         return {

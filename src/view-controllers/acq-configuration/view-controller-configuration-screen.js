@@ -40,14 +40,12 @@ class AcqConfigurationScreen {
     _connect() {
         this.socket.on("connect", () => {
             console.log("Connected to server");
-            UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#0F0";
         });
     }
 
     _disconnect() {
         this.socket.on("disconnect", () => {
             console.log("Disconnected from the server");
-            UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
         });
     }
 

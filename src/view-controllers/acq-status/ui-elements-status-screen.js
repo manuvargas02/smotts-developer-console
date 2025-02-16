@@ -1,4 +1,11 @@
 class UIAcqStatus {    
+    static get idScreen() {
+        if (!UIAcqStatus._idScreen) {
+            UIAcqStatus._idScreen = document.getElementById("status-screen");
+        }
+        return UIAcqStatus._idScreen;
+    }
+
     static get btnStop() {
         if (!UIAcqStatus._btnStop) {
             UIAcqStatus._btnStop = document.getElementById("btn-stop");

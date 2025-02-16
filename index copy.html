@@ -9,8 +9,9 @@
    
 </head>
 <body>
-    <div class="container">
-        <!-- CONFIGURATION SCREEN -->
+    <!-- CONFIGURATION SCREEN -->
+    <div id="configuration-screen" class="container">
+        <!-- Header with device statuses -->
         <div class="header">
             <div class="logo">
                 <img src="src/components/smotts-logo.png" />
@@ -25,11 +26,13 @@
                     <span id="bci-text-status-2">BCI Online</span>
                 </div>
                 <div class="status-item">
-                    <div id="emg-circle-status-2" class="status-indicator "></div>
+                    <div id="emg-circle-status-2" class="status-indicator"></div>
                     <span id="emg-text-status-2">EMG Offline</span>
                 </div>
             </div>
         </div>
+
+        <!-- Configuration Panel -->
         <div class="configuration-parameters-container">
             <h2 class="config-title">Configuration Parameters</h2>
         
@@ -63,7 +66,7 @@
             </div>
 
         
-            <!-- Electrodes selection -->
+            <!-- Electrodes Selection -->
             <div class="electrode-switch-container">
                 <div class="electrode-grid">
                     <div class="electrode-item">
@@ -94,7 +97,6 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-            
                     <div class="electrode-item">
                         <span class="electrode-label">F9</span>
                         <label class="switch">
@@ -125,12 +127,14 @@
                     </div>
                 </div>
             </div>
-            <!-- Buttons -->
+
+            <!-- Send/get configuration buttons -->
             <div class="config-buttons">
                 <button id="get-btn-bci" class="btn-config">Get Config</button>
                 <button id="send-btn-bci" class="btn-config">Set Config</button>
             </div>
-      
+        
+        <!-- Electrodes Test -->
         <div class="electrode-status-panel">
             <div class="electrode-state-grid">
                 <div class="electrode-state-item">
@@ -166,33 +170,83 @@
                     <span class="electrode-state-label">AFz</span>
                     <div id="bci-electrode-8" class="electrode-state-indicator red"></div>
                 </div>
-                <!-- TEST SENSORS -->
+                <!-- Test Sensor Button -->
                 <div id="test-electrodes-bci" class="test-sensors-button">
                     TEST <br> SENSORS
                 </div>
             </div>
+            <!-- Start Study Button -->
             <button id="start-study-btn" class="start-study-button">START STUDY</button>
         </div>
-    </div>
-    <div id = "console"></div>
-    </div>
-</div>
-
-
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="src/lib/socket_io.min.js"></script>
-        <script src="src/constants.js"></script>
-        <script src="src/components/devices-status.js"></script>
-        <script src="src/components/console-controller.js"></script>
-        <script src="src/components/electrodes-graph.js"></script>
-        <script src="src/components/parameters-configuration-pannels.js"></script>
-        <script src="src/websocket_manager.js"></script>
-        <script src="src/view-controllers/acq-configuration/ui-elements-configuration-screen.js"></script>
-        <script src="src/view-controllers/acq-configuration/view-controller-configuration-screen.js"></script>
-        <script src="src/view-controllers/acq-status/ui-elements-status-screen.js"></script>
-        <script src="src/view-controllers/acq-status/view-controller-status-screen.js"></script>
-        <script src="src/app.js"></script>
+        </div>
+        <div id = "console"></div>
+        </div>
         
-    </body>
+        <!-- STATUS SCREEN -->
+        <div id="status-screen" class="container">
+            <!-- Header with device statuses -->
+            <div class="header">
+                <div class="logo">
+                    <img src="src/components/smotts-logo.png" />
+                </div>
+                <div class="title-container">SMOTTS Administration Console</div>
+            </div>
+            <div class="hub-bci-emg-container">
+                <div id="hub-status-2" class="status-hub">READY TO CONNECT</div>
+                <div class="status-container">
+                    <div class="status-item">
+                        <div id="bci-circle-status-2" class="status-indicator"></div>
+                        <span id="bci-text-status-2">BCI Online</span>
+                    </div>
+                    <div class="status-item">
+                        <div id="emg-circle-status-2" class="status-indicator"></div>
+                        <span id="emg-text-status-2">EMG Offline</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Status Information Block -->
+            <div class="configuration-parameters-container">
+                <h2 class="config-title">System Status</h2>
+                <div class="config-row">
+
+                </div>
+                    
+                    <div class="info-container">
+                        <div class="info-item"><strong>BCI Status:</strong> <span id="bci-status-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Status:</strong> <span id="wristband-status-info">-</span></div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Frequency:</strong> <span id="bci-freq-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Frequency:</strong> <span id="wristband-freq-info">-</span></div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Gain:</strong> <span id="bci-gain-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Gain:</strong> <span id="wristband-gain-info">-</span></div>
+                        <hr>
+                        <div class="info-item"><strong>BCI Channels:</strong> <span id="bci-channels-info">-</span></div>
+                        <div class="info-item"><strong>Wristband Channels:</strong> <span id="wristband-channels-info">-</span></div>
+                    </div>
+                </div>
+                <div class = "graph-container">
+                        <canvas id="graph-1"></canvas>
+                        <button id="btn-stop" class="stop-study-button">STOP</button>
+                        <button id="btn-clear">CLEAR GRAPHS</button>
+                </div>
+            </div> 
+        </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="src/lib/socket_io.min.js"></script>
+    <script src="src/constants.js"></script>
+    <script src="src/components/devices-status.js"></script>
+    <script src="src/components/console-controller.js"></script>
+    <script src="src/components/electrodes-graph.js"></script>
+    <script src="src/components/parameters-configuration-pannels.js"></script>
+    <script src="src/websocket_manager.js"></script>
+    <script src="src/view-controllers/acq-configuration/ui-elements-configuration-screen.js"></script>
+    <script src="src/view-controllers/acq-configuration/view-controller-configuration-screen.js"></script>
+    <script src="src/view-controllers/acq-status/ui-elements-status-screen.js"></script>
+    <script src="src/view-controllers/acq-status/view-controller-status-screen.js"></script>
+    <script src="src/app.js"></script>
+        
+</body>
 </html>

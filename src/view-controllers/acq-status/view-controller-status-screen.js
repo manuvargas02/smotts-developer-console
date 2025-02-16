@@ -4,13 +4,13 @@ class AcqStatusScreen {
         //UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00";
         this._connect();
         this._disconnect();
-        this._hubStatus();
         this._bciStatus();
-        this._wristbandStatus();
+        this._emgStatus();
         this._stop();
         this._getStudyData();
         this._sendDataGraph("graph-1", "Fp1");
-        this._sendConsoleMessage();
+        //this._sendConsoleMessage();
+        this.hide();
     }
 
     destructor() {
@@ -31,38 +31,47 @@ class AcqStatusScreen {
 
     }
 
+    show() {
+        UIAcqStatus.idScreen.style.display = "block";
+    }
+
+    hide() {
+        UIAcqStatus.idScreen.style.display = "none";
+    }
+
     _connect() {
         this.socket.on("connect", () => {
             console.log("Connected to server");
-            UIAcqStatus.connectionIndicator.style.backgroundColor = "#0F0";
         });
     }
-    
+
     _disconnect() {
         this.socket.on("disconnect", () => {
             console.log("Disconnected from the server");
-            UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00";
         });
     }
 
     _hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
-            DeviceStatus.getHubStatus(UIAcqStatus, parsedData.status);
+            console.log("Hub status:", parsedData.status);
+            DeviceStatus.getHubStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
     _bciStatus() {
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
-            DeviceStatus.getBciStatus(UIAcqStatus, parsedData.status);
+            console.log("BCI status:", parsedData.status);
+            DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
-    _wristbandStatus() {
+    _emgStatus() {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
-            DeviceStatus.getWristbandStatus(UIAcqStatus, parsedData.status);
+            console.log("Wristband status:", parsedData.status);
+            DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
@@ -89,7 +98,7 @@ class AcqStatusScreen {
     }
 
     _sendDataGraph(htmlElement, electrode) {
-        const graph = new ElectrodeGraph(htmlElement, 300, -1, 1);
+        const graph = new ElectrodeGraph(htmlElement, 300, -1, 1, 1038, 463);
         this.socket.on("EEG_DATA", (data) => {
             const parsedData = JSON.parse(data);
             let electrodeData = parsedData.data[electrode];

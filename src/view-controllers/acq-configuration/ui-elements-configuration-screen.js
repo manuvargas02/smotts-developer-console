@@ -1,4 +1,11 @@
 class UIAcqConfiguration {
+    static get idScreen() {
+        if (!UIAcqConfiguration._idScreen) {
+            UIAcqConfiguration._idScreen = document.getElementById("configuration-screen");
+        }
+        return UIAcqConfiguration._idScreen;
+    }
+
     static get btnStart() {
         if (!UIAcqConfiguration._btnStart) {
             UIAcqConfiguration._btnStart = document.getElementById("start-study-btn");

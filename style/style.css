@@ -340,6 +340,47 @@ input:checked + .slider:before {
 }
 
 .start-study-button:hover {
-    background-color: #3A6F27; /* Cambio de color al pasar el mouse */
+    background-color: #3A6F27; 
+}
+
+.stop-study-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF0035; 
+    color: #E7E8EA;
+    font-weight: bold;
+    font-size: 64px;
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+    min-height: 125px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 40px;
+}
+
+.stop-study-button:hover {
+    background-color: #5e2d37; 
+}
+
+.info-item {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Graph Container */
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 680px;
+    margin-top: -650px;
+    gap: 20px; 
+    align-items: center;
+    border-radius: 10px;
+    width: 1038px;
+    height: 463px;
 }
 

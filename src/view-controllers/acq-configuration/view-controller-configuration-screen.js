@@ -37,6 +37,14 @@ class AcqConfigurationScreen {
         this.socket = null;
     }
 
+    show() {
+        UIAcqConfiguration.idScreen.style.display = "block";
+    }
+
+    hide() {
+        UIAcqConfiguration.idScreen.style.display = "none";
+    }
+
     _connect() {
         this.socket.on("connect", () => {
             console.log("Connected to server");

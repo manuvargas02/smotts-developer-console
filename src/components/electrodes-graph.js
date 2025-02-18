@@ -17,7 +17,7 @@ class ElectrodeGraph {
      * @param {string} [yLegend="mV"] - Label for the Y-axis.
      * @param {number} [lineWidth=2] - Width of the main signal line.
      */
-    constructor(htmlElement, maxPoints, yMin, yMax, width = 900, height = 400, borderRadius = 8, bgColor = '#F5F5F5', lineColor = '#E63946', xLegend = "samples", yLegend = "mV", lineWidth = 2) {
+    constructor(htmlElement, maxPoints, yMin, yMax, width = 900, height = 400, borderRadius = 8, bgColor = '#F5F5F5', lineColor = '#E63946', xLegend = "samples", yLegend = "uV", lineWidth = 2) {
         this.canvas = document.getElementById(htmlElement);
         this.bgColor = bgColor;
         this.borderRadius = borderRadius;

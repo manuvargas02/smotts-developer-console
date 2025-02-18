@@ -98,7 +98,7 @@ class AcqStatusScreen {
     }
 
     _sendDataGraph(htmlElement, electrode) {
-        const graph = new ElectrodeGraph(htmlElement, 300, -1, 1, 1038, 463);
+        const graph = new ElectrodeGraph(htmlElement, 800, -300, 300, 1038, 463);
         this.socket.on("EEG_DATA", (data) => {
             const parsedData = JSON.parse(data);
             let electrodeData = parsedData.data[electrode];

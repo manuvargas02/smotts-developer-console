@@ -85,7 +85,7 @@
     width: 39px;
     height: 39px;
     border-radius: 50%;
-    background-color: #4D8B31; /* Color de fondo para que se vea */
+    background-color: #4D8B31; 
     margin-right: 30px;
     position: absolute;
     left: 20px;
@@ -213,7 +213,7 @@ select:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #021D32; /* OFF color */
+    background-color: #021D32;
     border-radius: 20px;
     transition: 0.3s;
 }
@@ -260,8 +260,8 @@ input:checked + .slider:before {
 .electrode-state-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    row-gap: 25px; /* Espacio entre filas */
-    column-gap: 15px; /* Espacio entre columnas */
+    row-gap: 25px; 
+    column-gap: 15px; 
     width: 100%;
     padding: 35px;
     margin-left: 35px;

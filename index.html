@@ -19,15 +19,15 @@
             <div class="title-container">SMOTTS Administration Console</div>
         </div>
         <div class="hub-bci-emg-container">
-            <div id="hub-status-2" class="status-hub">READY TO CONNECT</div>
+            <div id="hub-status-2" class="status-hub">-</div>
             <div class="status-container">
                 <div class="status-item">
                     <div id="bci-circle-status-2" class="status-indicator"></div>
-                    <span id="bci-text-status-2">BCI Online</span>
+                    <span id="bci-text-status-2">-</span>
                 </div>
                 <div class="status-item">
                     <div id="emg-circle-status-2" class="status-indicator"></div>
-                    <span id="emg-text-status-2">EMG Offline</span>
+                    <span id="emg-text-status-2">-</span>
                 </div>
             </div>
         </div>
@@ -139,24 +139,24 @@
             <div class="electrode-state-grid">
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">Fp1</span>
-                    <div id="bci-electrode-1" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-1" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">Fp2</span>
-                    <div id="bci-electrode-2" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-2" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">AF7/F7</span>
-                    <div id="bci-electrode-3" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-3" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">AF8/F8</span>
-                    <div id="bci-electrode-4" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-4" class="electrode-state-indicator yellow"></div>
                 </div>
 
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">F9</span>
-                    <div id="bci-electrode-5" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-5" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">F10</span>
@@ -164,11 +164,15 @@
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">FPz</span>
-                    <div id="bci-electrode-7" class="electrode-state-indicator green"></div>
+                    <div id="bci-electrode-7" class="electrode-state-indicator yellow"></div>
                 </div>
                 <div class="electrode-state-item">
                     <span class="electrode-state-label">AFz</span>
-                    <div id="bci-electrode-8" class="electrode-state-indicator red"></div>
+                    <div id="bci-electrode-8" class="electrode-state-indicator yellow"></div>
+                </div>
+                <div class="electrode-state-item">
+                    <span class="electrode-state-label">emg</span>
+                    <div id="bci-electrode-9" class="electrode-state-indicator yellow"></div>
                 </div>
                 <!-- Test Sensor Button -->
                 <div id="test-electrodes-bci" class="test-sensors-button">
@@ -179,7 +183,7 @@
             <button id="start-study-btn" class="start-study-button">START STUDY</button>
         </div>
         </div>
-        <div id = "console"></div>
+        <div id = "console-configuration-screen"></div>
         </div>
         
         <!-- STATUS SCREEN -->
@@ -192,46 +196,115 @@
                 <div class="title-container">SMOTTS Administration Console</div>
             </div>
             <div class="hub-bci-emg-container">
-                <div id="hub-status-2" class="status-hub">READY TO CONNECT</div>
+                <div id="hub-status-1" class="status-hub">-</div>
                 <div class="status-container">
                     <div class="status-item">
-                        <div id="bci-circle-status-2" class="status-indicator"></div>
-                        <span id="bci-text-status-2">BCI Online</span>
+                        <div id="bci-circle-status-1" class="status-indicator"></div>
+                        <span id="bci-text-status-1">-</span>
                     </div>
                     <div class="status-item">
-                        <div id="emg-circle-status-2" class="status-indicator"></div>
-                        <span id="emg-text-status-2">EMG Offline</span>
+                        <div id="emg-circle-status-1" class="status-indicator"></div>
+                        <span id="emg-text-status-1">-</span>
                     </div>
                 </div>
             </div>
             <!-- Status Information Block -->
-            <div class="configuration-parameters-container">
-                <h2 class="config-title">System Status</h2>
-                <div class="config-row">
 
-                </div>
-                    
-                    <div class="info-container">
-                        <div class="info-item"><strong>BCI Status:</strong> <span id="bci-status-info">-</span></div>
-                        <div class="info-item"><strong>Wristband Status:</strong> <span id="wristband-status-info">-</span></div>
-                        <hr>
-                        <div class="info-item"><strong>BCI Frequency:</strong> <span id="bci-freq-info">-</span></div>
-                        <div class="info-item"><strong>Wristband Frequency:</strong> <span id="wristband-freq-info">-</span></div>
-                        <hr>
-                        <div class="info-item"><strong>BCI Gain:</strong> <span id="bci-gain-info">-</span></div>
-                        <div class="info-item"><strong>Wristband Gain:</strong> <span id="wristband-gain-info">-</span></div>
-                        <hr>
-                        <div class="info-item"><strong>BCI Channels:</strong> <span id="bci-channels-info">-</span></div>
-                        <div class="info-item"><strong>Wristband Channels:</strong> <span id="wristband-channels-info">-</span></div>
+            <div class="system-status-container">
+                <h2 class="config-title" style="margin-left: 10px;">System Status</h2>
+            <!-- Electrodes Selection -->
+            <div class="electrode-switch-container" style="margin-top: -12px;">
+                <div class="electrode-grid">
+                    <div class="electrode-item">
+                        <span class="electrode-label">Fp1</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">Fp2</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AF7/F7</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AF8/F8</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">F9</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">F10</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">FPz</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="electrode-item">
+                        <span class="electrode-label">AFz</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                 </div>
-                <div class = "graph-container">
-                        <canvas id="graph-1"></canvas>
-                        <button id="btn-stop" class="stop-study-button">STOP</button>
-                        <button id="btn-clear">CLEAR GRAPHS</button>
+                <div class="system-parameters">
+                    <div class="parameter-row" style="margin-top: 35px;">
+                        <label for="status">Status:</label>
+                        <input type="text" id="status" disabled>
+                    </div>
+                    <div class="parameter-row">
+                        <label for="frequency">Frequency:</label>
+                        <input type="text" id="frequency" disabled>
+                    </div>
+                    <div class="parameter-row">
+                        <label for="gain">Gain:</label>
+                        <input type="text" id="gain" disabled>
+                    </div>
                 </div>
-            </div> 
-        </div>
+            </div>
+            </div>
+            <button id = "btn-stop" class="stop-study-button">STOP</button>
+            <div class="graph-container">
+                <canvas id="graph-1"></canvas>
+                <canvas id="graph-2"></canvas>
+                <canvas id="graph-3"></canvas>
+                <canvas id="graph-4"></canvas>
+            </div>
+            <div id = "console-status-screen" style="margin-top: -115px;"></div>
+
+            <footer class="footer-text">
+                <span>SMOTTS Project. Demo for Transfiere 2025</span>
+                <span>AA-001</span>
+            </footer>
+            
+
+
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -1,15 +1,23 @@
 class AcqStatusScreen {
     constructor(socket) {
         this.socket = socket;
-        //UIAcqStatus.connectionIndicator.style.backgroundColor = "#F00";
         this._connect();
         this._disconnect();
+        this._hubStatus();
         this._bciStatus();
         this._emgStatus();
         this._stop();
         this._getStudyData();
-        this._sendDataGraph("graph-1", "Fp1");
-        //this._sendConsoleMessage();
+        this._maxPoints = 30
+        const graph1 = new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, 1038, 155.5);
+        const graph2 = new ElectrodeGraph("graph-2", this._maxPoints, -0.00007, 0.00006, 1038, 155.5);
+        const graph3 = new ElectrodeGraph("graph-3", this._maxPoints, -0.00007, 0.00006, 1038, 155.5);
+        const graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.3, 0.3, 1038, 133.79);
+        this._sendDataGraph(graph1,0);
+        this._sendDataGraph(graph2, 1);
+        this._sendDataGraph(graph3, 2);
+        this._sendDataGraph(graph4, 3);
+        this._sendConsoleMessage();
         this.hide();
     }
 
@@ -55,7 +63,7 @@ class AcqStatusScreen {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
             console.log("Hub status:", parsedData.status);
-            DeviceStatus.getHubStatus(UIAcqConfiguration, parsedData.status);
+            DeviceStatus.getHubStatus(UIAcqStatus, parsedData.status);
         });
     }
 
@@ -63,7 +71,7 @@ class AcqStatusScreen {
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
             console.log("BCI status:", parsedData.status);
-            DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
+            DeviceStatus.getBciStatus(UIAcqStatus, parsedData.status);
         });
     }
 
@@ -71,7 +79,7 @@ class AcqStatusScreen {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
             console.log("Wristband status:", parsedData.status);
-            DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
+            DeviceStatus.getEmgStatus(UIAcqStatus, parsedData.status);
         });
     }
 
@@ -97,14 +105,20 @@ class AcqStatusScreen {
         });
     }
 
-    _sendDataGraph(htmlElement, electrode) {
-        const graph = new ElectrodeGraph(htmlElement, 800, -300, 300, 1038, 463);
+    _sendDataGraph(graph, electrodeIndex) {
+        // Listen for EEG data and update the graph
         this.socket.on("EEG_DATA", (data) => {
+            // Parse the data
             const parsedData = JSON.parse(data);
-            let electrodeData = parsedData.data[electrode];
+            // Get the keys (names) of the data object
+            const electrodeKeys = Object.keys(parsedData.data);
+            // Get the name of the electrode in the specified index
+            const electrodeName = electrodeKeys[electrodeIndex];
+            // Get the data of the electrode with the name for the specified index
+            let electrodeData = parsedData.data[electrodeName];
+            // Add the data to the graph
             graph.addPoints(electrodeData);
         });
-        this._clearGraph(graph);
     }
 
     _clearGraph(graph) {
@@ -116,7 +130,7 @@ class AcqStatusScreen {
     }
 
     _sendConsoleMessage() {
-        const console = new ConsoleController("console", "CONSOLE", 800, 200, 300);
+        const console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
         this.socket.on("LOG_CONSOLE", (data) => {
             try {
                 const parsedData = JSON.parse(data);

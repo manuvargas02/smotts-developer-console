@@ -4,7 +4,7 @@ class AcqConfigurationScreen {
         // UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
         this._connect();
         this._disconnect();
-        //this._hubStatus();
+        this._hubStatus();
         this._bciStatus();
         this._emgStatus();
         this._start();
@@ -120,34 +120,6 @@ class AcqConfigurationScreen {
         });
     }
 
-    _setWristbandConfiguration() {
-        this._setWristbandConfigListener = () => {
-            console.log("Setting Wristband configuration...");
-            const config = ConfigPanel.setConfig("wristband");
-            console.log(config);
-            this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify(config));
-        };
-        UIAcqConfiguration.btnSendWristbandConfig.addEventListener("click", this._setWristbandConfigListener);
-    }
-
-    _getWristbandConfiguration() {
-        this._getWristbandConfigListener = () => {
-            console.log("Getting Wristband configuration...");
-            this.socket.emit("WRISTBAND_ACQ_CONFIG", JSON.stringify({ operation: "get_config" }));
-        };
-        UIAcqConfiguration.btnGetWristbandConfig.addEventListener("click", this._getWristbandConfigListener);
-
-        this.socket.on("WRISTBAND_ACQ_CONFIG", (response) => {
-            const parsedResponse = JSON.parse(response);
-            console.log(parsedResponse);
-            if (parsedResponse.operation === "get_config") {
-                ConfigPanel.getConfig("wristband", parsedResponse.data);
-            } else if (parsedResponse.operation === "set_config") {
-                console.log(parsedResponse.success ? "Wristband Configuration set successfully!" : "Failed to set Wristband Configuration.");
-            }
-        });
-    }
-
     _testBciElectrodes() {
         this._testBciElectrodesListener = () => {
             console.log("Testing BCI electrodes...");
@@ -166,26 +138,8 @@ class AcqConfigurationScreen {
         });
     }
 
-    _testWristbandElectrodes() {
-        this._testWristbandElectrodesListener = () => {
-            console.log("Testing Wristband electrodes...");
-            this.socket.emit("TEST_WRISTBAND_ELECTRODES", '{"test": true}');
-        };
-        UIAcqConfiguration.btnTestWristband.addEventListener("click", this._testWristbandElectrodesListener);
-
-        this.socket.on("WRISTBAND_ELECTRODES_STATUS", (data) => {
-            const parsedResponse = JSON.parse(data);
-            if (parsedResponse.status_ok) {
-                console.log("Wristband electrodes tested successfully!");
-                ConfigPanel.testElectrodes("Wristband", parsedResponse.electrodes_status);
-            } else {
-                console.log("Failed to test Wristband electrodes.");
-            }
-        });
-    }
-
     _sendConsoleMessage() {    
-        const console = new ConsoleController("console", "Console Output", 1685, 219, 300, "20px");
+        const console = new ConsoleController("console-configuration-screen", "Console Output", 1685, 219, 300, "20px");
         this.socket.on("LOG_CONSOLE", (data) => {
             try {
                 const parsedData = JSON.parse(data);

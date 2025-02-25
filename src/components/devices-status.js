@@ -10,7 +10,7 @@ class DeviceStatus {
         if (indicatorTextKey === "bciTextStatus") {
             screen[indicatorTextKey].innerHTML = status === "connected" ? "BCI Online" : "BCI Offline";
         }
-            else if (indicatorTextKey === "emgTextStatus") {
+        else if (indicatorTextKey === "emgTextStatus") {
             screen[indicatorTextKey].innerHTML = status === "connected" ? "EMG Online" : "EMG Offline";
         }
     }
@@ -20,6 +20,22 @@ class DeviceStatus {
      * @param {Object} screen - The screen object containing status indicator.
      * @param {string} status - The connection status ("connected" or "disconnected").
      */
+    static getHubStatus(screen, status) {
+        let type;
+        let color;
+        type = status["type"];
+        if (type === "success") {
+            color = Constants.enfasisColor;
+        }
+        else if (type === "error") {
+            color = Constants.errorColor;
+        }
+        else if (type === "warning") {
+            color = Constants.warningColor;
+        };
+        screen["hubStatus"].style.color = color;
+        screen["hubStatus"].innerText = status["message"];
+    }
 
     /**
      * Updates the BCI connection status indicator.

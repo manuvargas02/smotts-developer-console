@@ -13,7 +13,7 @@ class ConsoleController {
      * @param {string} [bgTitleColor="#00008B"] - Background color of the title bar.
      * @param {string} [titleColor="#FFFFFF"] - Text color of the title.
      */
-    constructor(htmlElement, title, width, height, maxHistory = 100, marginLeft="0px", bgColor = "#D9D9D9", bgTitleColor = "#021D32", titleColor = "#FFFFFF") {
+    constructor(htmlElement, title, width, height, maxHistory = 100, marginLeft="0px", marginTop="0px", bgColor = "#D9D9D9", bgTitleColor = "#021D32", titleColor = "#FFFFFF") {
         this.title = title;
         this.width = width;
         this.height = height;
@@ -23,6 +23,7 @@ class ConsoleController {
         this.maxHistory = maxHistory;
         this.htmlElement = htmlElement;
         this.marginLeft = marginLeft;
+        this.marginTop = marginTop;
 
         this._createConsoleElement();
     }
@@ -45,9 +46,10 @@ class ConsoleController {
         this.consoleElement.style.backgroundColor = this.bgColor;
         this.consoleElement.style.fontFamily = "monospace";
         this.consoleElement.style.border = "2px solid #333";
-        this.consoleElement.style.borderRadius = "8px";
+        this.consoleElement.style.borderRadius = "4px";
         this.consoleElement.style.overflow = "hidden";
         this.consoleElement.style.marginLeft = this.marginLeft;
+        this.consoleElement.style.marginTop = this.marginTop;
 
         // Create title element for console
         this.titleElement = document.createElement("div");

@@ -13,33 +13,40 @@ class UIAcqStatus {
         return UIAcqStatus._btnStop;
     }
 
-    static get connectionIndicator() {
-        if (!UIAcqStatus._connectionIndicator) {
-            UIAcqStatus._connectionIndicator = document.getElementById("connection-indicator-1");
-        }
-        return UIAcqStatus._connectionIndicator;
-    }
-
-    static get hubIndicator() {
+    static get hubStatus() {
         if (!UIAcqStatus._hubIndicator) {
             UIAcqStatus._hubIndicator = document.getElementById("hub-status-1");
         }
         return UIAcqStatus._hubIndicator;
     }
 
-    static get bciIndicator() {
-        if (!UIAcqStatus._bciIndicator) {
-            UIAcqStatus._bciIndicator = document.getElementById("bci-status-1");
+    static get bciCircleStatus() {
+        if (!UIAcqStatus._bciCircleStatus) {
+            UIAcqStatus._bciCircleStatus = document.getElementById("bci-circle-status-1");
         }
-        return UIAcqStatus._bciIndicator;
+        return UIAcqStatus._bciCircleStatus;
     }
 
-    static get wristIndicator() {
-        if (!UIAcqStatus._wristIndicator) {
-            UIAcqStatus._wristIndicator = document.getElementById("wristband-status-1");
+    static get bciTextStatus() {
+        if (!UIAcqStatus._bciTextStatus) {
+            UIAcqStatus._bciTextStatus = document.getElementById("bci-text-status-1");
         }
-        return UIAcqStatus._wristIndicator;
+        return UIAcqStatus._bciTextStatus;
     }
+
+    static get emgCircleStatus() {
+        if (!UIAcqStatus._emgCircleStatus) {
+            UIAcqStatus._emgCircleStatus = document.getElementById("emg-circle-status-1");
+        }
+        return UIAcqStatus._emgCircleStatus;
+    }
+
+    static get emgTextStatus() {
+        if (!UIAcqStatus._emgTextStatus) {
+            UIAcqStatus._emgTextStatus = document.getElementById("emg-text-status-1");
+        }
+        return UIAcqStatus._emgTextStatus;
+    }  
 
     static get btnClear() {  
         if (!UIAcqStatus._btnClear) {

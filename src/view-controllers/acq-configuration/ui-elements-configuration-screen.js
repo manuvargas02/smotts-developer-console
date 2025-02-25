@@ -13,7 +13,7 @@ class UIAcqConfiguration {
         return UIAcqConfiguration._btnStart;
     }
    
-    static get hubIndicator() {
+    static get hubStatus() {
         if (!UIAcqConfiguration._hubIndicator) {
             UIAcqConfiguration._hubIndicator = document.getElementById("hub-status-2");
         }
@@ -123,7 +123,8 @@ class UIAcqConfiguration {
                 document.getElementById("bci-electrode-5"),
                 document.getElementById("bci-electrode-6"),
                 document.getElementById("bci-electrode-7"),
-                document.getElementById("bci-electrode-8")
+                document.getElementById("bci-electrode-8"),
+                document.getElementById("bci-electrode-9")
             ];
         }
         return UIAcqConfiguration._btnBciElectrodes;
@@ -139,7 +140,8 @@ class UIAcqConfiguration {
                 document.getElementById("wristband-electrode-5"),
                 document.getElementById("wristband-electrode-6"),
                 document.getElementById("wristband-electrode-7"),
-                document.getElementById("wristband-electrode-8")
+                document.getElementById("wristband-electrode-8"),
+                document.getElementById("wristband-electrode-9")
             ];
         }
         return UIAcqConfiguration._btnWristbandElectrodes;

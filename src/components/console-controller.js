@@ -65,7 +65,7 @@ class ConsoleController {
         // Create scrollable message container element
         this.messageContainer = document.createElement("div");
         this.messageContainer.style.padding = "10px";
-        this.messageContainer.style.height = `${this.height - 50}px`;
+        this.messageContainer.style.height = `${this.height - 60}px`;
         this.messageContainer.style.overflowY = "auto";
         this.messageContainer.style.scrollbarWidth = "none"; //hides scrollbar
 
@@ -86,7 +86,7 @@ class ConsoleController {
     _addMessage(message, color) {
         // Create message element
         const messageElement = document.createElement("div");
-        messageElement.style.padding = "4px";
+        messageElement.style.padding = "5px";
 
         // Set font family and size of messages
         messageElement.style.fontFamily = "'Lato', sans-serif"; // Fuente Lato

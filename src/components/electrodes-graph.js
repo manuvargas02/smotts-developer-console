@@ -8,28 +8,31 @@ class ElectrodeGraph {
      * @param {number} maxPoints - Maximum number of data points to display.
      * @param {number} yMin - Minimum Y-axis value.
      * @param {number} yMax - Maximum Y-axis value.
-     * @param {number} [width=900] - Width of the canvas.
-     * @param {number} [height=400] - Height of the canvas.
-     * @param {number} [borderRadius=8] - Border radius of the canvas.
-     * @param {string} [bgColor='#F5F5F5'] - Background color of the graph.
-     * @param {string} [lineColor='#E63946'] - Color of the main signal line.
-     * @param {string} [xLegend="samples"] - Label for the X-axis.
-     * @param {string} [yLegend="mV"] - Label for the Y-axis.
-     * @param {number} [lineWidth=2] - Width of the main signal line.
+     * @param {Object} [params={}] - Optional parameters for graph customization.
+     * @param {number} [params.width=900] - Width of the canvas.
+     * @param {number} [params.height=400] - Height of the canvas.
+     * @param {number} [params.borderRadius=8] - Border radius of the canvas.
+     * @param {string} [params.bgColor='#F5F5F5'] - Background color of the graph.
+     * @param {string} [params.lineColor='#E63946'] - Color of the main signal line.
+     * @param {string} [params.xLegend="samples"] - Label for the X-axis.
+     * @param {string} [params.yLegend="mV"] - Label for the Y-axis.
+     * @param {number} [params.lineWidth=2] - Width of the main signal line.
      */
-    constructor(htmlElement, maxPoints, yMin, yMax, width = 900, height = 400, borderRadius = 4, bgColor = Constants.secondaryColor, lineColor = Constants.errorColor, xLegend = "samples", yLegend = "uV", lineWidth = 2) {
+    constructor(htmlElement, maxPoints, yMin, yMax, params = {}) {
         this.canvas = document.getElementById(htmlElement);
-        this.bgColor = bgColor;
-        this.borderRadius = borderRadius;
-        this.lineColor = lineColor;
-        this.xLegend = xLegend;
-        this.yLegend = yLegend;
-        this.lineWidth = lineWidth;
         this.maxPoints = maxPoints;
         this.yMin = yMin;
         this.yMax = yMax;
-        this.width = width;
-        this.height = height;
+    
+        this.width = params.width ?? 900;
+        this.height = params.height ?? 400;
+        this.borderRadius = params.borderRadius ?? 4;
+        this.bgColor = params.bgColor ?? Constants.secondaryColor;
+        this.lineColor = params.lineColor ?? Constants.errorColor;
+        this.xLegend = params.xLegend ?? "samples";
+        this.yLegend = params.yLegend ?? "uV";
+        this.lineWidth = params.lineWidth ?? 2;
+    
         this.xValue = 0;
 
         this.canvas.width = this.width;

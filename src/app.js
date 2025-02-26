@@ -1,8 +1,7 @@
-const wsManager = new WebSocketManager(Constants.serverIP, Constants.serverPort);
 
 function main(){
-    const AcqConfiguration = new AcqConfigurationScreen(wsManager.socket);
-    const AcqStatus = new AcqStatusScreen(wsManager.socket);
+    const AcqConfiguration = new AcqConfigurationScreen(Constants.serverIP, Constants.serverPort);
+    const AcqStatus = new AcqStatusScreen(Constants.serverIP, Constants.serverPort);
 
     UIAcqConfiguration.btnStart.addEventListener("click", () => {
         AcqConfiguration.hide();

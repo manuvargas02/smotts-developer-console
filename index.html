@@ -281,15 +281,15 @@
                 <div class="system-parameters">
                     <div class="parameter-row" style="margin-top: 35px;">
                         <label for="status">Status:</label>
-                        <input type="text" id="status" disabled>
+                        <div id="status" class="display-box">-</div>
                     </div>
                     <div class="parameter-row">
                         <label for="frequency">Frequency:</label>
-                        <input type="text" id="frequency" disabled>
+                        <div id="frequency" class="display-box">-</div>
                     </div>
                     <div class="parameter-row">
                         <label for="gain">Gain:</label>
-                        <input type="text" id="gain" disabled>
+                        <div id="gain" class="display-box">-</div>
                     </div>
                 </div>
             </div>
@@ -320,7 +320,6 @@
     <script src="src/components/console-controller.js"></script>
     <script src="src/components/electrodes-graph.js"></script>
     <script src="src/components/parameters-configuration-pannels.js"></script>
-    <script src="src/websocket_manager.js"></script>
     <script src="src/view-controllers/acq-configuration/ui-elements-configuration-screen.js"></script>
     <script src="src/view-controllers/acq-configuration/view-controller-configuration-screen.js"></script>
     <script src="src/view-controllers/acq-status/ui-elements-status-screen.js"></script>

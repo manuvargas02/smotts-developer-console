@@ -6,7 +6,7 @@ class DeviceStatus {
      * @param {string} status - The status of the device ("connected" or "disconnected").
      */
     static updateIndicator(screen, indicatorCircleKey, indicatorTextKey, status) {
-        screen[indicatorCircleKey].style.backgroundColor = status === "connected" ? "#0F0" : "#F00";
+        screen[indicatorCircleKey].style.backgroundColor = status === "connected" ? Constants.enfasisColor : Constants.errorColor;
         if (indicatorTextKey === "bciTextStatus") {
             screen[indicatorTextKey].innerHTML = status === "connected" ? "BCI Online" : "BCI Offline";
         }
@@ -61,12 +61,7 @@ class DeviceStatus {
      */
     static getStudyData(data) {
         UIAcqStatus.studyData.bciStatus.innerHTML = data["BCI status"];
-        UIAcqStatus.studyData.wristbandStatus.innerHTML = data["Wristband status"];
         UIAcqStatus.studyData.bciFreq.innerHTML = `${data["BCI frequency"]} Hz`;
-        UIAcqStatus.studyData.wristbandFreq.innerHTML = `${data["Wristband frequency"]} Hz`;
         UIAcqStatus.studyData.bciGain.innerHTML = data["BCI gain"];
-        UIAcqStatus.studyData.wristbandGain.innerHTML = data["Wristband gain"];
-        UIAcqStatus.studyData.bciChannels.innerHTML = data["BCI channels"];
-        UIAcqStatus.studyData.wristbandChannels.innerHTML = data["Wristband channels"];
     }
 }

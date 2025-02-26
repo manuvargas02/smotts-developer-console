@@ -435,9 +435,10 @@ input:checked + .slider:before {
     text-align: left;
 }
 
-.system-parameters input {
+.system-parameters .display-box {
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    align-items: center;
     background-color: var(--secondary-color);
     border: none;
     width: 188px;
@@ -447,6 +448,9 @@ input:checked + .slider:before {
     font-size: 16px;
     border-radius: 4px;
     text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
 }
 
 /* Footer */

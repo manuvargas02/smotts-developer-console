@@ -58,14 +58,9 @@ class UIAcqStatus {
     static get studyData() {
         if (!UIAcqStatus._studyData) {
             UIAcqStatus._studyData = {
-                bciStatus: document.getElementById("bci-status-info"),
-                wristbandStatus: document.getElementById("wristband-status-info"),
-                bciFreq: document.getElementById("bci-freq-info"),
-                wristbandFreq: document.getElementById("wristband-freq-info"),
-                bciGain: document.getElementById("bci-gain-info"),
-                wristbandGain: document.getElementById("wristband-gain-info"),
-                bciChannels: document.getElementById("bci-channels-info"),
-                wristbandChannels: document.getElementById("wristband-channels-info")
+                bciStatus: document.getElementById("status"),
+                bciFreq: document.getElementById("frequency"),
+                bciGain: document.getElementById("gain")
             };
         }
         return UIAcqStatus._studyData;

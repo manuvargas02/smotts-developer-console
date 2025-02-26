@@ -1,7 +1,11 @@
 class AcqConfigurationScreen {
-    constructor(socket) {
-        this.socket = socket;
-        // UIAcqConfiguration.connectionIndicator.style.backgroundColor = "#F00";
+    constructor(ip, port) {
+        // Connect to the server
+        this.ip = ip;
+        this.port = port;
+        this.socket = io.connect(`http://${this.ip}:${this.port}`);
+        
+        // Intialize private methods and create console of the screen
         this._connect();
         this._disconnect();
         this._hubStatus();
@@ -11,7 +15,7 @@ class AcqConfigurationScreen {
         this._setBciConfiguration();
         this._getBciConfiguration();
         this._testBciElectrodes();
-        this._sendConsoleMessage();
+        this.console = new ConsoleController("console-configuration-screen", "Console Output", 1685, 219, 300, "20px");
     }
 
     destructor() {
@@ -68,6 +72,11 @@ class AcqConfigurationScreen {
     _bciStatus() {
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
+            if (parsedData.status === "connected") {
+                this.console.addSuccess("BCI connected successfully!");
+            } else {
+                this.console.addError("BCI disconnected!");
+            }
             console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
         });
@@ -76,6 +85,11 @@ class AcqConfigurationScreen {
     _emgStatus() {
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
+            if (parsedData.status === "connected") {
+                this.console.addSuccess("EMG connected successfully!");
+            } else {
+                this.console.addError("EMG disconnected!");
+            }
             console.log("Wristband status:", parsedData.status);
             DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
         });
@@ -87,6 +101,7 @@ class AcqConfigurationScreen {
             this.socket.on("START", (data) => {
                 const parsedResponse = JSON.parse(data);
                 console.log(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
+                this.console.addSuccess(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
             });
         };
         UIAcqConfiguration.btnStart.addEventListener("click", this._startListener);
@@ -114,8 +129,10 @@ class AcqConfigurationScreen {
             console.log(parsedResponse);
             if (parsedResponse.operation === "get_config") {
                 ConfigPanel.getConfig("bci", parsedResponse.data);
+                this.console.addSuccess("BCI configuration received");
             } else if (parsedResponse.operation === "set_config") {
                 console.log(parsedResponse.success ? "BCI Configuration set successfully!" : "Failed to set BCI Configuration.");
+                this.console.addSuccess(parsedResponse.success ? "BCI Configuration set successfully!" : "Failed to set BCI Configuration.");
             }
         });
     }
@@ -130,35 +147,33 @@ class AcqConfigurationScreen {
         this.socket.on("BCI_ELECTRODES_STATUS", (data) => {
             const parsedResponse = JSON.parse(data);
             if (parsedResponse.status_ok) {
-                console.log("BCI electrodes tested successfully!");
+                console.log("Electrodes tested successfully!");
+                this.console.addWarning("Testing electrodes...")
+                this.console.addSuccess("Electrodes tested successfully!");
                 ConfigPanel.testElectrodes("Bci", parsedResponse.electrodes_status);
             } else {
-                console.log("Failed to test BCI electrodes.");
+                console.log("Failed to test electrodes.");
+                this.console.addError("Failed to test electrodes.");
             }
         });
     }
 
-    _sendConsoleMessage() {    
-        const console = new ConsoleController("console-configuration-screen", "Console Output", 1685, 219, 300, "20px");
-        this.socket.on("LOG_CONSOLE", (data) => {
-            try {
-                const parsedData = JSON.parse(data);
-    
-                if (parsedData["operation"] === "info") {
-                    console.addInfo(parsedData["data"]);
-                } 
-                else if (parsedData["operation"] === "warning") {
-                    console.addWarning(parsedData["data"]);
-                } 
-                else if (parsedData["operation"] === "error") {
-                    console.addError(parsedData["data"]);
-                } 
-                else {
-                    console.addSuccess(parsedData["data"]);
-                }
-            } catch (error) {
-                console.addError(`Error receiving console data: ${error.message}`);
+    _sendConsoleMessage(message, type) {
+        try {
+            if (type === "info") {
+                console.addInfo(message);
+            } 
+            else if (type === "error") {
+                console.addError(message);
             }
-        });
+            else if (type === "warning") {
+                console.addWarning(message);
+            }
+            else {
+                console.addSuccess(message);
+            }
+        } catch (error) {
+            console.addError(`Error receiving console data: ${error.message}`);
+        }
     }
 }

@@ -15,10 +15,29 @@ class AcqStatusScreen {
         this._getStudyData();
         this._maxPoints = 300;
         this._graphSize = 150;
+
         this.graph1 = new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
         this.graph2 = new ElectrodeGraph("graph-2", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
         this.graph3 = new ElectrodeGraph("graph-3", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
         this.graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.3, 0.3, {width: 1038, height: this._graphSize});
+ /*       // Create first set of graphs
+        this.graphSet1 = [
+            new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-2", this._maxPoints, -0.00007, 0.00006, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-3", this._maxPoints, -0.00007, 0.00006, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-4", this._maxPoints, -0.3, 0.3, { width: 1038, height: this._graphSize }),
+        ];
+
+        // Create second set of graphs
+        this.graphSet2 = [
+            new ElectrodeGraph("graph-5", this._maxPoints, -0.00005, 0.00005, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-6", this._maxPoints, -0.00006, 0.00007, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-7", this._maxPoints, -0.00008, 0.00009, { width: 1038, height: this._graphSize }),
+            new ElectrodeGraph("graph-8", this._maxPoints, -0.2, 0.2, { width: 1038, height: this._graphSize }),
+        ];
+*/
+        this.currentGraphSet = this.graphSet1;
+
         this.console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
         this.hide();
     }
@@ -56,6 +75,20 @@ class AcqStatusScreen {
         this.graph3.clear();
         this.graph4.clear();
         this.socket.off("EEG_DATA");
+    }
+
+    showGraphs() {
+        this.currentGraphSet.forEach((graph, index) => {
+            document.getElementById(`graph-${index}`).style.display = "none";
+            graph.clear();
+        });
+    }
+
+    hideGraphs() {
+        this.currentGraphSet.forEach((graph, index) => {
+            document.getElementById(`graph-${index}`).style.display = "none";
+            graph.clear();
+        });
     }
 
     _connect() {
@@ -150,6 +183,14 @@ class AcqStatusScreen {
             console.log("Graph cleared!");
         };
         UIAcqStatus.btnClear.addEventListener("click", this._clearGraphListener);
+    }
+
+    _swtichGraphs() {
+        UIAcqStatus.btnSwitch.addEventListener("change", (event) => {
+            this.hideGraphs();
+            this.currentGraphSet = (UIAcqStatus.btnSwitch === "Set 1") ? this.graphSet1 : this.graphSet2;
+            this.showGraphs();
+        });
     }
 
     _sendConsoleMessage(message, type) {

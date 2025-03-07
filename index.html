@@ -40,9 +40,10 @@
             <div class="config-row">
                 <label for="freq-bci">Frequency:</label>
                 <select id="freq-bci">
+                    <option value="500">500</option>
                     <option value="1000">1000</option>
-                    <option value="10000">10000</option>
-                    <option value="5000">5000</option>
+                    <option value="2000">2000</option>
+                    <option value="4000">4000</option>
                 </select>
             </div>
         
@@ -50,9 +51,12 @@
             <div class="config-row">
                 <label for="gain-bci">Gain:</label>
                 <select id="gain-bci">
-                    <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="24">24</option>
                 </select>
             </div>
         
@@ -60,8 +64,8 @@
             <div class="config-row">
                 <label for="input-type-bci">Input Type:</label>
                 <select id="input-type-bci">
-                    <option value="test">Test</option>
-                    <option value="test2">Test2</option>
+                    <option value="normal">normal</option>
+                    <option value="test">test</option>
                 </select>
             </div>
 
@@ -224,57 +228,49 @@
                     <div class="electrode-item">
                         <span class="electrode-label">Fp1</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-11" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">Fp2</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-12" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">AF7/F7</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-13" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">AF8/F8</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-14" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">F9</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-15" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">F10</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-16" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">FPz</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-17" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                     <div class="electrode-item">
                         <span class="electrode-label">AFz</span>
                         <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
+                            <div id="bci-electrode-18" class="electrode-state-indicator-status yellow"></div>
                         </label>
                     </div>
                 </div>

@@ -65,4 +65,21 @@ class UIAcqStatus {
         }
         return UIAcqStatus._studyData;
     }
+
+    static get btnBciElectrodes() {
+        if (!UIAcqConfiguration._btnBciElectrodes) {
+            UIAcqConfiguration._btnBciElectrodes = [
+                document.getElementById("bci-electrode-11"),
+                document.getElementById("bci-electrode-12"),
+                document.getElementById("bci-electrode-13"),
+                document.getElementById("bci-electrode-14"),
+                document.getElementById("bci-electrode-15"),
+                document.getElementById("bci-electrode-16"),
+                document.getElementById("bci-electrode-17"),
+                document.getElementById("bci-electrode-18"),
+                document.getElementById("bci-electrode-19")
+            ];
+        }
+        return UIAcqConfiguration._btnBciElectrodes;
+    }
 }

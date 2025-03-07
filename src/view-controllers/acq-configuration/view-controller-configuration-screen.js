@@ -145,12 +145,11 @@ class AcqConfigurationScreen {
         UIAcqConfiguration.btnTestBci.addEventListener("click", this._testBciElectrodesListener);
 
         this.socket.on("BCI_ELECTRODES_STATUS", (data) => {
-            const parsedResponse = JSON.parse(data);
-            if (parsedResponse.status_ok) {
+            if (data.status_ok) {
                 console.log("Electrodes tested successfully!");
                 this.console.addWarning("Testing electrodes...")
                 this.console.addSuccess("Electrodes tested successfully!");
-                ConfigPanel.testElectrodes("Bci", parsedResponse.electrodes_status);
+                ConfigPanel.testElectrodes("Bci", data.electrodes_status);
             } else {
                 console.log("Failed to test electrodes.");
                 this.console.addError("Failed to test electrodes.");

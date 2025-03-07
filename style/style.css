@@ -308,6 +308,14 @@ input:checked + .slider:before {
     margin-top: 10px;
 }
 
+.electrode-state-indicator-status {
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: 13px;
+}
+
 /* Colores de los electrodos */
 .green { background-color: var(--enfasis-color); }
 .yellow { background-color: var(--warning-color); }

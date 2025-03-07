@@ -37,11 +37,16 @@ class ConfigPanel {
      * @param {Array<boolean>} data - An array indicating the status of each electrode (true for active, false for inactive).
      */
     static testElectrodes(device, data) {
-        const electrodes = UIAcqConfiguration[`btn${device}Electrodes`];
-        console.log("Electrode Status:", data);
+        const electrodes_config = UIAcqConfiguration[`btn${device}Electrodes`];
+        const electrodes_status = UIAcqStatus[`btn${device}Electrodes`];
 
-        electrodes.forEach((electrode, index) => {
+        electrodes_config.forEach((electrode, index) => {
             electrode.style.backgroundColor = data[index] ? "green" : "red";
         });
+
+        electrodes_status.forEach((electrode, index) => {
+            electrode.style.backgroundColor = data[index] ? "green" : "red";
+        });
+        
     }
 }

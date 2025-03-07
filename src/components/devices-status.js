@@ -93,13 +93,13 @@ class DeviceStatus {
      * @param {number} data.BCI gain - The gain value of the BCI device.
      */
     static getStudyData(data) {
-        if (data["BCI status"] === "connected") {
+        if (data["status"] === "connected") {
             UIAcqStatus.studyData.bciStatus.innerHTML = "Online";
         }
         else {
             UIAcqStatus.studyData.bciStatus.innerHTML = "Offline";
         }
-        UIAcqStatus.studyData.bciFreq.innerHTML = `${data["BCI frequency"]} Hz`;
-        UIAcqStatus.studyData.bciGain.innerHTML = data["BCI gain"];
+        UIAcqStatus.studyData.bciFreq.innerHTML = `${data["freq"]} Hz`;
+        UIAcqStatus.studyData.bciGain.innerHTML = data["gain"];
     }
 }

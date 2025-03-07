@@ -19,7 +19,7 @@ class AcqStatusScreen {
         this.graph1 = new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
         this.graph2 = new ElectrodeGraph("graph-2", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
         this.graph3 = new ElectrodeGraph("graph-3", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
-        this.graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.3, 0.3, {width: 1038, height: this._graphSize});
+        this.graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
  /*       // Create first set of graphs
         this.graphSet1 = [
             new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, { width: 1038, height: this._graphSize }),
@@ -39,7 +39,7 @@ class AcqStatusScreen {
         this.currentGraphSet = this.graphSet1;
 
         this.console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
-        this.hide();
+        //this.hide();
     }
 
     destructor() {

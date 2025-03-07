@@ -67,8 +67,8 @@ class UIAcqStatus {
     }
 
     static get btnBciElectrodes() {
-        if (!UIAcqConfiguration._btnBciElectrodes) {
-            UIAcqConfiguration._btnBciElectrodes = [
+        if (!UIAcqStatus._btnBciElectrodes) {
+            UIAcqStatus._btnBciElectrodes = [
                 document.getElementById("bci-electrode-11"),
                 document.getElementById("bci-electrode-12"),
                 document.getElementById("bci-electrode-13"),
@@ -80,6 +80,6 @@ class UIAcqStatus {
                 document.getElementById("bci-electrode-19")
             ];
         }
-        return UIAcqConfiguration._btnBciElectrodes;
+        return UIAcqStatus._btnBciElectrodes;
     }
 }

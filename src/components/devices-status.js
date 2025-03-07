@@ -49,7 +49,6 @@ class DeviceStatus {
 
         // Set the color based on the status type
         let color;
-        console.log(currentStatus.type);
         switch (currentStatus.type) {
             case "success":
                 color = Constants.enfasisColor;
@@ -61,7 +60,6 @@ class DeviceStatus {
                 color = Constants.errorColor;
                 break;
         }
-        console.log("color", color);
 
         screen["hubStatus"].innerText = currentStatus.message;
         screen["hubStatus"].style.color = color;

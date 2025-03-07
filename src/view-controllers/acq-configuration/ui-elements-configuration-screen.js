@@ -146,4 +146,20 @@ class UIAcqConfiguration {
         }
         return UIAcqConfiguration._btnWristbandElectrodes;
     }
+
+    static get switchElectrodes() {
+        if (!UIAcqConfiguration._switchElectrodes) {
+            UIAcqConfiguration._switchElectrodes = [
+                document.getElementById("switch-electrode-1"),
+                document.getElementById("switch-electrode-2"),
+                document.getElementById("switch-electrode-3"),
+                document.getElementById("switch-electrode-4"),
+                document.getElementById("switch-electrode-5"),
+                document.getElementById("switch-electrode-6"),
+                document.getElementById("switch-electrode-7"),
+                document.getElementById("switch-electrode-8"),
+            ]
+        }
+        return UIAcqConfiguration._switchElectrodes;
+    }
 }

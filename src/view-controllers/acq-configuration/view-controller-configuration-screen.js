@@ -15,6 +15,7 @@ class AcqConfigurationScreen {
         this._setBciConfiguration();
         this._getBciConfiguration();
         this._testBciElectrodes();
+        this.startedSucess = false;
         this.console = new ConsoleController("console-configuration-screen", "Console Output", 1685, 219, 300, "20px");
     }
 
@@ -64,7 +65,6 @@ class AcqConfigurationScreen {
     _hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("Hub status:", parsedData.status);
             DeviceStatus.getHubStatus(UIAcqConfiguration, parsedData.status);
         });
     }
@@ -77,7 +77,6 @@ class AcqConfigurationScreen {
             } else {
                 this.console.addError("BCI disconnected!");
             }
-            console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
         });
     }
@@ -90,7 +89,6 @@ class AcqConfigurationScreen {
             } else {
                 this.console.addError("EMG disconnected!");
             }
-            console.log("Wristband status:", parsedData.status);
             DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
         });
     }
@@ -98,11 +96,6 @@ class AcqConfigurationScreen {
     _start() {
         this._startListener = () => {
             this.socket.emit("START", '{"start": true}');
-            this.socket.on("START", (data) => {
-                const parsedResponse = JSON.parse(data);
-                console.log(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
-                this.console.addSuccess(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
-            });
         };
         UIAcqConfiguration.btnStart.addEventListener("click", this._startListener);
     }

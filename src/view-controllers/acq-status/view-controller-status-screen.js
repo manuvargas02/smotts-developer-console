@@ -39,7 +39,7 @@ class AcqStatusScreen {
         this.currentGraphSet = this.graphSet1;
 
         this.console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
-        //this.hide();
+        this.hide();
     }
 
     destructor() {
@@ -106,7 +106,6 @@ class AcqStatusScreen {
     _hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("Hub status:", parsedData.status);
             DeviceStatus.getHubStatus(UIAcqStatus, parsedData.status);
         });
     }
@@ -119,7 +118,6 @@ class AcqStatusScreen {
             } else {
                 this.console.addError("BCI disconnected!");
             }
-            console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqStatus, parsedData.status);
         });
     }
@@ -132,7 +130,6 @@ class AcqStatusScreen {
             } else {
                 this.console.addError("EMG disconnected!");
             }
-            console.log("Wristband status:", parsedData.status);
             DeviceStatus.getEmgStatus(UIAcqStatus, parsedData.status);
         });
     }
@@ -140,16 +137,6 @@ class AcqStatusScreen {
     _stop() {
         this._stopListener = () => {
             this.socket.emit("STOP", '{"stop": true}');
-            this.socket.on("STOP", (data) => {
-                const parsedResponse = JSON.parse(data);
-                if (parsedResponse.success) {
-                    console.log("Data Acquisition stopped successfully!");
-                    this.console.addSuccess("Data Acquisition stopped successfully!");
-                } else {
-                    console.log("Failed to stop Data Acquisition");
-                    this.console.addError("Failed to stop Data Acquisition");
-                }
-            });
         };
         UIAcqStatus.btnStop.addEventListener("click", this._stopListener);
     }

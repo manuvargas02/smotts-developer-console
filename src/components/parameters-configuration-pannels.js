@@ -21,7 +21,7 @@ class ConfigPanel {
         const config = {
             freq: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].freq.value, 10),
             gain: parseInt(UIAcqConfiguration[`${devicePanel}ConfigButtons`].gain.value, 10),
-            inputType: UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value,
+            input_type: UIAcqConfiguration[`${devicePanel}ConfigButtons`].inputType.value,
             channels: channels 
         };
 
@@ -43,6 +43,7 @@ class ConfigPanel {
         let channel = config.channels;
         const electrodes = UIAcqConfiguration[`switchElectrodes`];
         // Convert the channel value to a binary string
+        console.log(channel);
         channel = parseInt(channel, 10).toString(2);
         // Add leading zeros to the binary string
         const binaryString = channel.padStart(electrodes.length, "0");

@@ -4,30 +4,29 @@ function main(){
     const AcqStatus = new AcqStatusScreen(Constants.serverIP, Constants.serverPort);
     socket = AcqConfiguration.socket;
 
-    UIAcqConfiguration.btnStart.addEventListener("click", () => {
-        this.socket.on("START", (data) => {
-            const parsedResponse = JSON.parse(data);
-            if (parsedResponse.success) {
-                console.log("Data Acquisition started successfully!");
-                AcqConfiguration.hide();
-                AcqStatus.show();
-            } else {
-                console.log("Failed to start Data Acquisition");
-            }
-        });
+    this.socket.on("START", (data) => {
+        const parsedResponse = JSON.parse(data);
+        if (parsedResponse.success) {
+            AcqConfiguration.console.addSuccess("Data Acquisition started successfully");
+            console.log("Data Acquisition started successfully");
+            AcqConfiguration.hide();
+            AcqStatus.show();
+        } else {
+            AcqConfiguration.console.addError("Failed to start Data Acquisition");
+            console.log("Failed to start Data Acquisition");
+        }
     });
     
-    UIAcqStatus.btnStop.addEventListener("click", () => {
-        this.socket.on("STOP", (data) => {
-            const parsedResponse = JSON.parse(data);
-            if (parsedResponse.success) {
-                AcqStatus.hide();
-                AcqConfiguration.show();
-                console.log("Data Acquisition stopped successfully!");
-            } else {
-                console.log("Failed to stop Data Acquisition");
-            }
-        });
+    this.socket.on("STOP", (data) => {
+        const parsedResponse = JSON.parse(data);
+        if (parsedResponse.success) {
+            AcqStatus.hide();
+            AcqConfiguration.show();
+            AcqStatus.console.addSuccess("Data Acquisition stopped successfully");
+            console.log("Data Acquisition stopped successfully");
+        } else {
+            console.log("Failed to stop Data Acquisition");
+        }
     });
 }
 

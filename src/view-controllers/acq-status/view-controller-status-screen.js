@@ -13,13 +13,13 @@ class AcqStatusScreen {
         this._emgStatus();
         this._stop();
         this._getStudyData();
-        this._maxPoints = 288;
+        this._maxPoints = 300;
         this._graphSize = 150;
 
-        this.graph1 = new ElectrodeGraph("graph-1", this._maxPoints, -0.00005, 0.00004, {width: 1038, height: this._graphSize});
-        this.graph2 = new ElectrodeGraph("graph-2", this._maxPoints, -0.00005, 0.00004, {width: 1038, height: this._graphSize});
-        this.graph3 = new ElectrodeGraph("graph-3", this._maxPoints, -0.00005, 0.00004, {width: 1038, height: this._graphSize});
-        this.graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.00005, 0.00004, {width: 1038, height: this._graphSize});
+        this.graph1 = new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
+        this.graph2 = new ElectrodeGraph("graph-2", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
+        this.graph3 = new ElectrodeGraph("graph-3", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
+        this.graph4 = new ElectrodeGraph("graph-4", this._maxPoints, -0.00007, 0.00006, {width: 1038, height: this._graphSize});
  /*       // Create first set of graphs
         this.graphSet1 = [
             new ElectrodeGraph("graph-1", this._maxPoints, -0.00007, 0.00006, { width: 1038, height: this._graphSize }),
@@ -36,6 +36,8 @@ class AcqStatusScreen {
             new ElectrodeGraph("graph-8", this._maxPoints, -0.2, 0.2, { width: 1038, height: this._graphSize }),
         ];
 */
+        this.currentGraphSet = this.graphSet1;
+
         this.console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
         this.hide();
     }
@@ -109,35 +111,24 @@ class AcqStatusScreen {
     }
 
     _bciStatus() {
-        this.lastBciStatus = null; 
-    
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
-    
-            if (parsedData.status !== this.lastBciStatus) {
-                if (parsedData.status === "connected") {
-                    this.console.addSuccess("BCI connected successfully");
-                } else {
-                    this.console.addError("BCI disconnected");
-                }
-                this.lastBciStatus = parsedData.status;
+            if (parsedData.status === "connected") {
+                this.console.addSuccess("BCI connected successfully!");
+            } else {
+                this.console.addError("BCI disconnected!");
             }
             DeviceStatus.getBciStatus(UIAcqStatus, parsedData.status);
         });
     }
 
     _emgStatus() {
-        this.lastEmgStatus = null; 
-    
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
-            if (parsedData.status !== this.lastEmgStatus) {
-                if (parsedData.status === "connected") {
-                    this.console.addSuccess("EMG connected successfully");
-                } else {
-                    this.console.addError("EMG disconnected");
-                }
-                this.lastEmgStatus = parsedData.status;
+            if (parsedData.status === "connected") {
+                this.console.addSuccess("EMG connected successfully!");
+            } else {
+                this.console.addError("EMG disconnected!");
             }
             DeviceStatus.getEmgStatus(UIAcqStatus, parsedData.status);
         });
@@ -176,7 +167,7 @@ class AcqStatusScreen {
     _clearGraph(graph) {
         this._clearGraphListener = () => {
             graph.clear();
-            console.log("Graph cleared");
+            console.log("Graph cleared!");
         };
         UIAcqStatus.btnClear.addEventListener("click", this._clearGraphListener);
     }

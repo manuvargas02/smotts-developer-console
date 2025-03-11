@@ -4,7 +4,7 @@ class Constants {
     }
 
     static get serverIP() {
-        return "localhost";
+        return "192.168.0.124";
     }
 
     static get serverPort() {

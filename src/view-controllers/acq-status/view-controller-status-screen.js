@@ -39,7 +39,7 @@ class AcqStatusScreen {
         this.currentGraphSet = this.graphSet1;
 
         this.console = new ConsoleController("console-status-screen", "Console Output", 1685, 219, 300, "20px", "180px");
-        //this.hide();
+        this.hide();
     }
 
     destructor() {

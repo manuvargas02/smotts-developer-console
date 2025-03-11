@@ -64,33 +64,39 @@ class AcqConfigurationScreen {
     _hubStatus() {
         this.socket.on("STATUS_HUB", (data) => {
             const parsedData = JSON.parse(data);
-            console.log("Hub status:", parsedData.status);
             DeviceStatus.getHubStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
     _bciStatus() {
+        this.lastBciStatus = null; 
         this.socket.on("STATUS_BCI", (data) => {
             const parsedData = JSON.parse(data);
-            if (parsedData.status === "connected") {
-                this.console.addSuccess("BCI connected successfully!");
-            } else {
-                this.console.addError("BCI disconnected!");
+            if (parsedData.status !== this.lastBciStatus) {
+                if (parsedData.status === "connected") {
+                    this.console.addSuccess("BCI connected successfully");
+                } else {
+                    this.console.addError("BCI disconnected");
+                }
+                this.lastBciStatus = parsedData.status;
             }
-            console.log("BCI status:", parsedData.status);
             DeviceStatus.getBciStatus(UIAcqConfiguration, parsedData.status);
         });
     }
 
     _emgStatus() {
+        this.lastEmgStatus = null; 
+    
         this.socket.on("STATUS_WRISTBAND", (data) => {
             const parsedData = JSON.parse(data);
-            if (parsedData.status === "connected") {
-                this.console.addSuccess("EMG connected successfully!");
-            } else {
-                this.console.addError("EMG disconnected!");
+            if (parsedData.status !== this.lastEmgStatus) {
+                if (parsedData.status === "connected") {
+                    this.console.addSuccess("EMG connected successfully");
+                } else {
+                    this.console.addError("EMG disconnected");
+                }
+                this.lastEmgStatus = parsedData.status;
             }
-            console.log("Wristband status:", parsedData.status);
             DeviceStatus.getEmgStatus(UIAcqConfiguration, parsedData.status);
         });
     }
@@ -98,11 +104,6 @@ class AcqConfigurationScreen {
     _start() {
         this._startListener = () => {
             this.socket.emit("START", '{"start": true}');
-            this.socket.on("START", (data) => {
-                const parsedResponse = JSON.parse(data);
-                console.log(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
-                this.console.addSuccess(parsedResponse.success ? "Data Acquisition started successfully!" : "Failed to start Data Acquisition");
-            });
         };
         UIAcqConfiguration.btnStart.addEventListener("click", this._startListener);
     }
@@ -131,14 +132,15 @@ class AcqConfigurationScreen {
                 ConfigPanel.getConfig("bci", parsedResponse.data);
                 this.console.addSuccess("BCI configuration received");
             } else if (parsedResponse.operation === "set_config") {
-                console.log(parsedResponse.success ? "BCI Configuration set successfully!" : "Failed to set BCI Configuration.");
-                this.console.addSuccess(parsedResponse.success ? "BCI Configuration set successfully!" : "Failed to set BCI Configuration.");
+                console.log(parsedResponse.success ? "BCI Configuration set successfully" : "Failed to set BCI Configuration.");
+                this.console.addSuccess(parsedResponse.success ? "BCI Configuration set successfully" : "Failed to set BCI Configuration.");
             }
         });
     }
 
     _testBciElectrodes() {
         this._testBciElectrodesListener = () => {
+            this.console.addWarning("Testing electrodes...")
             console.log("Testing BCI electrodes...");
             this.socket.emit("TEST_BCI_ELECTRODES", '{"test": true}');
         };
@@ -146,9 +148,8 @@ class AcqConfigurationScreen {
 
         this.socket.on("BCI_ELECTRODES_STATUS", (data) => {
             if (data.status_ok) {
-                console.log("Electrodes tested successfully!");
-                this.console.addWarning("Testing electrodes...")
-                this.console.addSuccess("Electrodes tested successfully!");
+                console.log("Electrodes tested successfully");
+                this.console.addSuccess("Electrodes tested successfully");
                 ConfigPanel.testElectrodes("Bci", data.electrodes_status);
             } else {
                 console.log("Failed to test electrodes.");
